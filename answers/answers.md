@@ -8,11 +8,11 @@ CÂU A1:
             4. -> Response chạy ngược lại: cáp quang -> nhà mạng -> router -> máy tính cá nhân
             5. -> Chrome nhận file HTML,CSS,JS -> render ra giao diện -> thấy trang chủ của shopee
     2.
-        ![alt text](image.png)
+        ![alt text](screenshot/image.png)
         Status code của request đầu tiên: 200 (Thành công và trả về kết quả)
-        ![alt text](image-1.png)
+        ![alt text](screenshot/image-1.png)
         Tổng thời gian load trang: 1.46 giây
-        ![alt text](image-2.png)
+        ![alt text](screenshot/image-2.png)
         Request trả về file CSS trong đó : status code: 200 (Thành công và trả về kết quả), thời gian thực hiện của request: 73ms
 CÂU A2:
     +Tại sao trang web bị Google đánh giá SEO thấp?
@@ -52,7 +52,7 @@ CÂU A2:
         </footer>
 
 CÂU A3:
-    ![alt text](text_art.jpg)
+    ![alt text](screenshot/text_art.jpg)
 
     Giải thich:
     - <div>: Chiếm cả dòng có thể xuống dòng mới và điều chỉnh chiều rộng,dài
