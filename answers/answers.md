@@ -340,3 +340,19 @@ CÂU C2 - SO SÁNH VÀ TRANH LUẬN - PHẦN C: PHẢN BIỆN
 
 3. Trường hợp thực tế mà thẻ <div> vẫn phù hợp
     -Dùng gom nhóm để căn chỉnh CSS cho các bố cục trong trang web
+
+=======================================================================================================
+PHIẾU BÀI TẬP 2: HTML_Forms_Media
+
+CÂU A1: Input Types
+1. type="text" -> Ô nhập text, không có validation tự động -> dùng cho form nhập thông tin
+2. type="email" -> Ô nhập text, có tự kiểm tra @ -> dùng cho form đăng nhập, đăng ký
+3. type="password" -> Ô nhập text có ẩn ký tự, không có validation tự động -> dùng cho form đăng nhập, đăng ký
+4. type="number" -> Ô nhập số có nút tăng giảm, có các validation: min,max,step -> dùng khi chọn số lượng sản phẩm
+5. type="tel" -> Ô nhập số có bàn phím số trên điện thoại, có validation: pattern -> dùng cho form nhập thông tin liên hệ
+6. type="date" -> Bộ chọn ngày tháng năm, có kiểm tra định dạng ngày,tháng,năm và min, max -> dùng cho form nhập thông tin cá nhân 
+7. type="color" -> Bộ chọn màu sắc, không có validation tự động -> dùng khi chọn màu sản phẩm
+8. type="range" -> Thanh kéo, kiểm tra min, max, step -> dùng chọn khoảng giá sản phẩm
+9. type="file" -> Tải file lên, có giới hạn loại file (accept), chọn nhiều file (multiple) -> dùng khi tải ảnh sản phẩm lên phần đánh giá
+10. type="search" -> Ô nhập tìm kiếm, không có validation tự động -> dùng khi tìm kiếm sản phẩm
+
