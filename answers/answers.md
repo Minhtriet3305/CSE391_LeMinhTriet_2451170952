@@ -336,7 +336,7 @@ CÂU C2 - SO SÁNH VÀ TRANH LUẬN - PHẦN C: PHẢN BIỆN
     Google không chỉ đọc nội dung trong trang mà còn phân tích cấu trúc của trang web.Khi bạn dùng <div> cho header thì Google sẽ không biết đó là phần đầu trang.Nếu dùng thẻ semantic như: <header>, <nav>, <article>,... có thể giúp Google hiểu rõ hơn về cấu trúc trang cùng với đó trang sẽ được đẩy lên đầu.
     - Ví dụ: Khi ta dùng công cụ dev tool để so sánh giữa trang web sử dụng thẻ <div> và trang sử dụng các thẻ semantic sẽ thấy trang sử dụng các thẻ semantic sẽ được đẩy lên đầu trang.
 2. Lý do kỹ thuật: Accessibility
-    Người dùng khuyết tật dùng screen reader (công cụ đọc trang web) để duyệt internet. Khi gặp <nav>, screen reader sẽ thông báo "Điều hướng", giúp người dùng nhảy trực tiếp đến phần menu thay vì phải nghe toàn bộ trang. Nếu dùng <div class="nav">, screen reader chỉ đọc là "div", người dùng sẽ lúng túng.
+    Người dùng khiếm thị dùng screen reader (công cụ đọc trang web) để duyệt internet. Khi gặp <nav>, screen reader sẽ thông báo "Điều hướng", giúp người dùng nhảy trực tiếp đến phần menu thay vì phải nghe toàn bộ trang. Nếu dùng <div class="nav">, screen reader chỉ đọc là "div", người dùng sẽ lúng túng.
 
 3. Trường hợp thực tế mà thẻ <div> vẫn phù hợp
     -Dùng gom nhóm để căn chỉnh CSS cho các bố cục trong trang web
@@ -368,4 +368,31 @@ DỰ ĐOÁN:
     ![alt text](screenshot/case_4.png)
     -Trường hợp 5: submit thất bại vì trong thẻ <input> dùng type="password" và yêu cầu tối thiểu độ dài là từ 8 (minlength="8") nhưng giá trị độ dài chỉ có 3 nên khi submit sẽ hiện thông báo lỗi 
     ![alt text](screenshot/case_5.png)
+
+CÂU A3: 
+    1. Screen reader là công cụ giúp người khiếm thị nghe được nội dung trang web.Khi người đọc lướt đến khu vực có thẻ <input> mà không có thẻ <label> chứa id định dạng của input thì screen reader sẽ không biết thẻ <input> dùng để nhập cái gì.Khi có thuộc tính id trong <input> và for trong <input> thì khi lướt đến công cụ screen reader sẽ đọc khi khu vực này nhập gì.
+    2. Trong 1 form có nhiều thẻ <input> và nếu muốn tổ chức form rõ ràng cho người dùng.
+    VD:
+        <form>
+            <fieldset>
+                <legend>Thông tin cá nhân</legend>
+                
+                <label>Họ tên:</label>
+                <input type="text"><br><br>
+                
+                <label>Email:</label>
+                <input type="email">
+            </fieldset>
+
+            <fieldset>
+                <legend>Sở thích</legend>
+                
+                <input type="checkbox"> Đọc sách<br>
+                <input type="checkbox"> Chơi game<br>
+                <input type="checkbox"> Code
+            </fieldset>
+        </form> 
+    Ta thấy như ví dụ trên nếu sử dụng <field set> + <legend> ta sẽ dễ dàng nhân biết được các khung input khác nhau và mỗi khung có 1 tiêu đề rõ ràng.
+    3. aria-label có thể được dùng nếu như ta không sử dụng thẻ <label> cho <input>.Nếu như ta đã có thẻ <label> mà dùng tiếp aria-label thì sẽ bị thừa.
+
 
