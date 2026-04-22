@@ -357,3 +357,15 @@ CÂU A1: Input Types
 10. type="search" -> Ô nhập tìm kiếm, không có validation tự động -> dùng khi tìm kiếm sản phẩm
 
 CÂU A2: 
+DỰ ĐOÁN:
+    - Trường hợp 1: submit thất bại vì trong thẻ <input> dùng type="text" có require bắt buộc phải có giá trị nhưng giá trị lại để trống khi bấm submit sẽ hiện thông báo lỗi.
+    ![alt text](screenshot/case_1.png)
+    - Trường hợp 2: submit thất bại vì type="email" nên sẽ có kiểm tra xem giá trị có "@" hay không nhưng giá trị trong thẻ lại là "abc" không có dấu @ nên khi bấm submit sẽ hiện thông báo lỗi.
+    ![alt text](screenshot/case_2.png)
+    -Trường hợp 3: submit thất bại vì trong thẻ <input> dùng type="number" và 2 thuộc tính min="1" và max="10" nhưng giá trị lại là 15 vượt quá giới hạn nên khi submit sẽ hiện thông báo lỗi.
+    ![alt text](screenshot/case_3.png)
+    -Trường hợp 4: submit thất bại vì trong thẻ <input> dùng type="text" và có pattern="[0,9]{10}" yêu cầu nhập 10 số với giá trị từ 0 đến 9 nhưng giá trị đầu vào lại có "abc" nên khi bấm submit sẽ hiện thông báo lỗi.
+    ![alt text](screenshot/case_4.png)
+    -Trường hợp 5: submit thất bại vì trong thẻ <input> dùng type="password" và yêu cầu tối thiểu độ dài là từ 8 (minlength="8") nhưng giá trị độ dài chỉ có 3 nên khi submit sẽ hiện thông báo lỗi 
+    ![alt text](screenshot/case_5.png)
+
