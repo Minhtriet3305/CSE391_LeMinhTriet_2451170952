@@ -395,4 +395,11 @@ CÂU A3:
     Ta thấy như ví dụ trên nếu sử dụng <field set> + <legend> ta sẽ dễ dàng nhân biết được các khung input khác nhau và mỗi khung có 1 tiêu đề rõ ràng.
     3. aria-label có thể được dùng nếu như ta không sử dụng thẻ <label> cho <input>.Nếu như ta đã có thẻ <label> mà dùng tiếp aria-label thì sẽ bị thừa.
 
+CÂU A4:
+    - Thuộc tính loading="lazy" trong thẻ <img> giúp cho ảnh chỉ hiển thị khi lướt đến.Nó giúp cải thiện tốc độ load trang, nếu người dùng không lướt đến khu vực đấy thì trang sẽ không hiện ảnh giúp tiết kiệm data.
+    - Khi nào không nên dùng:
+        + Nếu người dùng muốn thấy ảnh ngay không phải lướt đến mới thấy.
+        + Các logo,ảnh bìa đây là những ảnh cần hiển thị ngay
+ 
+
 
