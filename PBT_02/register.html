@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+</head>
+<body>
+ <form action="#" method="post">
+        <fieldset>
+            <legend>Thông tin cá nhân</legend>
+    
+            <label for="username">Họ tên:</label>
+            <input type="text" id="username" name="username" required minlength="2" maxlength="50"><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+
+            <label for="number">Số điện thoại:</label>
+            <input type="tel" id="number" name="number"  pattern="(0[3|5|7|8|9])+([0-9]{11})\b"><br><br>
+
+            <label for="birthdate">Ngày sinh:</label>
+            <input type="date" id="birthdate" name="birthdate" max> <br><br>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+            
+            <label for="address">Địa chỉ:</label>
+            <input type="text" id="address" name="address" required><br><br>
+
+            <label for="city">Thành phố:</label>
+            <input type="text" id="city" name="city" required><br><br>
+
+            <label for="country">Quốc gia:</label>
+            <input type="text" id="country" name="country" required><br><br>
+
+            
+        </fieldset>
+
+
+
+        <fieldset>
+            <legend>Tài khoản</legend>
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" pattern="^[a-zA-Z0-9_]{3,20}$" placeholder="Nguyễn Văn A"><br><br>
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" minlength="8" pattern="(?=.*\d)(?=.*[A-Z])" placeholder="Ít nhất 8 ký tự, bao gồm chữ hoa và số"><br><br>
+
+            
+    
+        </fieldset>
+
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+            <label for="city">Thành phố:</label>
+            <select id="city" name="city" required>
+                <option value="">--Chọn thành phố--</option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="hcm">Hồ Chí Minh</option>
+                <option value="danang">Đà Nẵng</option>
+                <option value="hue">Huế</option>
+                <option value="cantho">Cần Thơ</option>
+            </select><br><br>
+            
+            <label for="district">Quận/Huyện:</label>
+            <select id="district" name="district">
+                <option value="">-- Chọn Quận/Huyện --</option>
+                <option value="ba_dinh">Ba Đình</option>
+                <option value="hoan_kiem">Hoàn Kiếm</option>
+                <option value="hai_ba_trung">Hai Bà Trưng</option>
+                <option value="dong_da">Đống Đa</option>
+                <option value="cau_giay">Cầu Giấy</option>
+                <option value="thanh_xuan">Thanh Xuân</option>
+                <option value="ha_dong">Hà Đông</option>
+                <option value="nam_tu_liem">Nam Từ Liêm</option>
+            </select><br><br>
+
+            <label for="address">Địa chỉ chi tiết:</label>
+            <textarea id="address" name="address" rows="3" placeholder="Số nhà, tên đường, tổ/dân phố..."></textarea>
+
+            <label for="gender">Giới tính:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Nam</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Nữ</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Khác</label><br><br>
+
+            <label>
+                <input type="checkbox" name="terms" required>
+                Tôi đồng ý với các điều khoản và điều kiện
+            </label> <br><br>
+
+            
+
+        </fieldset>
+
+        <button type="submit" style="gap: 20px">submit</button>
+        <button type="reset">Reset</button>
+    </form>
+
+
+
+
+
+
+</body>
+
+</html>
