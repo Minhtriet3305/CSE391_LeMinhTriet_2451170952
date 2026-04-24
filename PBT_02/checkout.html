@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+
+<body>
+
+    <div>
+        <label for="product-search">Tìm kiếm sản phẩm:</label>
+        <input type="search" id="product-search" name="product-search" list="product-suggestions" placeholder="Nhập tên sản phẩm...">
+
+        <datalist id="product-suggestions">
+            <option value="Áo thun nam"></option>
+            <option value="Quần jeans nữ"></option>
+        </datalist>
+    </div>
+
+
+
+
+    <div id="table">
+        <table border="1">
+            <tr>
+                <th>STT</th>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Áo thun nam</td>
+                <td>2</td>
+                <td>200.000 VND</td>
+                <td>400.000 VND</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Quần jeans nữ</td>
+                <td>1</td>
+                <td>500.000 VND</td>
+                <td>500.000 VND</td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right">Tổng cộng:</td>
+                <td>900.000 VND</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <br>
+
+    <div class="checkout-summary">
+            <p>Tạm tính: 900.000đ</p>
+            <p>Giảm giá: -50.000đ</p>
+            <label for="total">Tổng thanh toán:</label>
+            <output id="total" name="total">850.000đ</output>
+    </div>
+
+    <br><br>
+
+    <div>
+        <form action="#" method="post">
+            <label for="payment">Phương thức thanh toán:</label>
+            <input type="radio" id="COD" name="payment" value="COD" required>
+            <label for="COD">COD</label>
+            <input type="radio" id="bank" name="payment" value="bank">
+            <label for="bank">Chuyển khoản</label>
+            <input type="radio" id="momo" name="payment" value="momo">
+            <label for="momo">Ví điện tử Momo</label><br><br>
+            <label for="discount">Mã giảm giá:</label>
+            <input type="text" id="discount" name="discount" pattern="SALE\d{4}">
+            <br><br>
+            <label for="note">Ghi chú:</label>
+            <textarea id="note" name="note" rows="4" cols="50"></textarea><br><br>
+        </form>
+    </div>
+
+    <br><br>
+
+    <div>
+         <fieldset>
+            <legend>Thông tin giao hàng</legend>
+            <label for="city">Thành phố:</label>
+            <select id="city" name="city" required>
+                <option value="">--Chọn thành phố--</option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="hcm">Hồ Chí Minh</option>
+                <option value="danang">Đà Nẵng</option>
+                <option value="hue">Huế</option>
+                <option value="cantho">Cần Thơ</option>
+            </select><br><br>
+            
+            <label for="district">Quận/Huyện:</label>
+            <select id="district" name="district">
+                <option value="">-- Chọn Quận/Huyện --</option>
+                <option value="ba_dinh">Ba Đình</option>
+                <option value="hoan_kiem">Hoàn Kiếm</option>
+                <option value="hai_ba_trung">Hai Bà Trưng</option>
+                <option value="dong_da">Đống Đa</option>
+                <option value="cau_giay">Cầu Giấy</option>
+                <option value="thanh_xuan">Thanh Xuân</option>
+                <option value="ha_dong">Hà Đông</option>
+                <option value="nam_tu_liem">Nam Từ Liêm</option>
+            </select><br><br>
+
+            <label for="address">Địa chỉ chi tiết:</label>
+            <textarea id="address" name="address" rows="3" placeholder="Số nhà, tên đường, tổ/dân phố..."></textarea>
+
+            <label for="date">Ngày giao hàng mong muốn:</label>
+            <input type="date" id="date" name="date" required min>
+            <br><br>
+
+            <label for="time">Khung giờ giao hàng:</label>
+            <select id="time" name="time">
+                <option value="">-- Chọn khung giờ --</option>
+                <option value="morning">Sáng (8:00 - 12:00)</option>
+                <option value="afternoon">Chiều (14:00 - 18:00)</option>
+                <option value="evening">Tối (18:00 - 21:00)</option>
+            </select><br><br>
+
+            <label for="delivery">Thời gian giao hàng:</label>
+            <input type="text" id="delivery" name="delivery" min="1" max="7" step="1">
+
+        </fieldset>
+
+        <br><br>
+
+        <button type="confirm" aria-label="Xác nhận đặt hàng">Xác nhận đặt hàng</button>
+    </div>
+
+</body>
+
+</html>
