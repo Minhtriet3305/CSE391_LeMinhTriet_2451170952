@@ -95,6 +95,7 @@ CÂU A4:
     Nếu thêm <p class="price" id="main-price" style="color: orange;"> thì element sẽ có màu cam 
 4.
     Nếu Rule A thêm !important thì element sẽ có màu đen vì khi thêm !important thì trình duyệt sẽ cho ưu tiên tuyệt đối.
+
     
 
     

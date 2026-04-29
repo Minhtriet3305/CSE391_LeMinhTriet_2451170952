@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box; 
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: lightblue;
+    color: white;
+    line-height: auto;
+}
+
+header{
+    background: linear-gradient(to right, #4CAF50, #8BC34A);
+    color: white;
+    padding: 20px;
+}
+
+header nav:hover{
+    color: red;
+}
+
+#skills .skills-table{
+    border-collapse: collapse;
+}
+
+#skills .skills-table th{
+    background-color: #4CAF50;
+    color: white;
+}
+
+#skills .skills-table tr:nth-child(even){
+    background-color: #8BC34A;
+}
+
+#skills .skills-table tr:hover{
+    background-color: red;
+    color: white;
+}
+
+footer{
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+}
