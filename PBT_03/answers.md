@@ -96,6 +96,16 @@ CÂU A4:
 4.
     Nếu Rule A thêm !important thì element sẽ có màu đen vì khi thêm !important thì trình duyệt sẽ cho ưu tiên tuyệt đối.
 
+PHẦN B: THỰC HÀNH CODE
+CÂU B2:
+    Hộp 1 (content-box): chiều rộng thực tế = 349.6 px 
+    ![alt text](screenshots/box_model.png)
+    Hộp 2 (border-box): chiều rộng thực tế = 300 px 
+    ![alt text](screenshots/box_model2.png)
+    Giải thích sự khác biệt: 
+    - Ở hộp 1 ta được chiều rộng thực tế là 349.6px trong khi chúng ta cho chiều rộng chỉ khoảng 300 đấy là vì với content-box mặc định thì chiều rộng chỉ áp dụng khu vực nội dung còn padding và border bị phình to ra nên t thấy được chiều rộng thực tế thay vì chỉ 300 thì nó cộng tiếp với padding và border.
+    - Ở hộp 2 ta được chiều rộng thực tế là 300px vừa đúng với chiều rộng đã khai báo ban đầu đấy là vì với border-box thì padding và border sẽ co vào trong thay vì phình to ra 
+
     
 
     
