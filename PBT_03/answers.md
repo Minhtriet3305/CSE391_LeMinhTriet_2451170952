@@ -126,6 +126,12 @@ CÂU B2:
              cột 3 chiều rộng ta thấy vẫn bằng 250px
              => 250 + 500 + 250 = 1000px
  CÂU B3:
+    1. Đã liệt kê trong file css
+    2. element cuối cùng hiển thị màu navy vì Specificity score là 120 cao nhất thế nên nó sẽ thắng tất cả các màu khác
+    3. Kết quả:
+    ![alt text](screenshots/text_color.png)
+    4. 
+        Nếu thay đổi thứ tự rules trong CSS file. Kết quả không thay đổi. Vì Specificity score quan trọng hơn thứ tự xuất hiện vì rule số 10 có điểm cao nhất nên kể cả có đặt ở bất kỳ đâu thì trình duyệt vẫn chọn nó để áp dụng màu.
     
 
     
