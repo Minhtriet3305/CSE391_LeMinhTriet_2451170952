@@ -148,6 +148,32 @@ CÂU C1:
             + sidebar: 300 - 20 * 2 - 1 * 2 = 258px
             + content: 660 - 30 * 2 - 1 * 2 = 598px
 
+CÂU C2:
+    1. Phân tích kết quả cho "Sản phẩm A" (h2)
+    font-size: 20px
+       Giải thích: Thẻ h2 nhận giá trị từ bộ chọn trực tiếp .card .title có độ ưu tiên cao hơn so với việc kế thừa giá trị 14px từ cha là .container.
+    color: green
+      Giải thích: Mặc dù bộ chọn #featured .title có ID (độ ưu tiên cao), nhưng dòng .highlight { color: green !important; } sử dụng từ khóa !important. Quy tắc này mặc định được trình duyệt ưu tiên lên cao nhất, ghi đè tất cả các màu sắc khác bất kể độ ưu tiên của bộ chọn hay thứ tự xuất hiện.
+
+    2. Phân tích kết quả cho "Mô tả sản phẩm A" (p)
+    color: blue
+      Giải thích: Thẻ p này chịu tác động bởi rule .card p { color: inherit; }. Từ khóa inherit buộc phần tử con phải kế thừa chính xác giá trị màu của cha trực tiếp nó là .card (đang có màu blue).
+
+    3. Phân tích kết quả cho "Sản phẩm B" (h2)
+    font-size: 20px
+      Giải thích: Tương tự Sản phẩm A, giá trị thiết lập trực tiếp tại .card .title (20px) luôn thắng giá trị kế thừa từ .container (14px).
+    color: blue
+      Giải thích: Thẻ h2 này không nằm trong vùng có id="featured" và cũng không có class .highlight. Vì vậy, nó sẽ kế thừa màu sắc từ thẻ cha gần nhất là .card (màu blue).
+
+    4. Phân tích kết quả cho "Mô tả sản phẩm B" (p.highlight)
+    color: green
+      Giải thích: Dù thẻ p có lệnh inherit để lấy màu xanh từ cha, nhưng class .highlight đi kèm với !important đã ép trình duyệt phải áp dụng màu green. Thuộc tính !important sẽ ghi đè lên cả cơ chế kế thừa và các bộ chọn thông thường.
+    
+    - Screenshot kết quả:
+![alt text](screenshots/Cascade_puzzle.png)
+
+
+
 
     
 
