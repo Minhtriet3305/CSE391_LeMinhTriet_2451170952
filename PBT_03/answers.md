@@ -54,7 +54,7 @@ CÂU A2:
     ![alt text](screenshots/Selector5.png)
     ![alt text](screenshots/Selector_HTML5.png)
     ![alt text](screenshots/Selector_CSS5.png)
-    6. article > p: chọn tất cả các thẻ p trong thẻ article
+    6. article > p: chọn các thẻ con trực tiếp p trong thẻ article
     ![alt text](screenshots/Selector6.png)
     ![alt text](screenshots/Selector_HTML6.png)
     ![alt text](screenshots/Selector_CSS6.png)
