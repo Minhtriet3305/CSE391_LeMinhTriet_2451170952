@@ -60,5 +60,54 @@ CÂU A2:
     [ Item 4 ] [ Item 5 ] [ Item 6 ]
     [ Item 7 ] [  trống ] [  trống ]
 
+PHẦN C: SUY LUẬN
 
+CÂU C1:
+1. Navigation bar ngang (logo + menu + buttons): dùng flexbox. Vì Navbar chủ yếu là sắp xếp các phần tử theo 1 chiều ngang,flexbox rất mạnh cho việc căn giữa, spacing (justify-content) và responsive đơn giản.
+2. Lưới ảnh Instagram (3 cột đều nhau, số ảnh không biết trước): dùng grid. Đây là layout dạng 2 chiều (hàng + cột). CSS Grid giúp chia đều 3 cột dễ dàng bằng grid-template-columns và tự động xuống hàng khi thêm ảnh mới.
+3. Layout blog: main content + sidebar: dùng grid. Blog layout thường cần chia khu vực rõ ràng: content lớn + sidebar nhỏ,grid phù hợp vì quản lý các cột chính xác hơn.
+4. Footer với 4 cột thông tin (Về chúng tôi, Liên kết, Hỗ trợ, Liên hệ): dùng grid. Vì footer có cấu trúc 4 cột nên dùng grid có thể chia các cột tiện hơn.
+5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy): dùng flexbox. Card là layout theo 1 chiều dọc, nên flexbox phù hợp. Có thể dùng display:flex; flex-direction:column; và margin-top:auto cho button để nút luôn nằm dưới đáy card.
 
+CÂU C2:
+
+1. Lỗi 1: 
+   -Nguyên nhân: .card-container là flex, nhưng bản thân mỗi .card không phải flex column. Nội dung dài hơn làm card thấp hơn → nút “Mua” không thẳng hàng.
+   -Code sửa: 
+    .card-container { display: flex; flex-wrap: wrap; }
+    .card { display: flex; flex-direction: column; width: 30%; margin: 1.5%; }
+    .card img { width: 100%; }
+    .card h3 { font-size: 18px; }
+    .card .btn { margin-top: auto; padding: 10px; }
+   -Lúc chưa sửa:
+    ![alt text](screenshots/Loi1_ChuaSua.png)
+   -Khi đã sửa:
+    ![alt text](screenshots/Loi1_DaSua.png)
+
+2. Lỗi 2:
+    -Nguyên nhân: .hero có display: flex nhưng mặc định flex-direction row, main-axis là ngang, cross-axis dọc. Không có căn chỉnh ⇒ item con co giãn tự nhiên và nằm ở đầu.
+    -Code sửa:
+    .hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    .hero-content {
+        text-align: center;
+    }
+    -Lúc chưa sửa:
+    ![alt text](screenshots/Loi2_ChuaSua.png)
+    -Khi đã sửa:
+    ![alt text](screenshots/Loi2_DaSua.png)
+
+3. Lỗi 3:
+    -Nguyên nhân:  .layout {display: flex} mặc định các phần tử con có flex-shrink: 1, khi content quá dài, sidebar phải co lại để tránh tràn.
+    -Code sửa:
+    .layout { display: flex;}
+    .sidebar { width: 250px; flex-shrink: 0}
+    .content { flex: 1; }
+    -Lúc chưa sửa:
+    ![alt text](screenshots/Loi3_ChuaSua.png)
+    -Khi đã sửa: 
+    ![alt text](screenshots/Loi3_DaSua.png)
