@@ -83,3 +83,60 @@ CÂU A3:
     | 1000px              | 960px            |
     | 1400px              | 1140px           |
 
+CÂU A4:
+    -Variables:Lưu trữ giá trị (màu sắc, font-size, spacing,...) để tái sử dụng. Khi cần thay đổi, chỉ sửa một chỗ.
+    VD:
+        $primary-color: #3498db;
+        $font-size-base: 16px;
+
+        .button {
+        background: $primary-color;
+        font-size: $font-size-base;
+        }
+
+    -Nesting:Viết selector lồng bên trong selector khác, phản ánh đúng cấu trúc HTML.
+    VD:
+        .nav {
+                ul {
+                    list-style: none;
+                    li {
+                    display: inline-block;
+                    a {
+                        color: white;
+                        &:hover { color: blue; }
+                    }
+                    }
+                }
+            }
+
+    -Mixins: Tạo khối code tái sử dụng, có thể nhận tham số (giống hàm).
+    VD:
+        @mixin border-radius($radius) {
+            border-radius: $radius;
+        }
+
+        .card {
+            @include border-radius(10px);
+        }
+    
+    -@extend / Inheritance:  Selector kế thừa thuộc tính của selector khác.
+    VD: 
+        %button-base {
+        padding: 10px 20px;
+        border: none;
+        }
+
+        .btn-primary {
+        @extend %button-base;
+        background: blue;
+        }
+
+    Tại sao trình duyệt KHÔNG đọc được file .scss?
+
+    Lý do: Trình duyệt chỉ hiểu CSS thuần. SCSS là ngôn ngữ mở rộng (preprocessor) có cú pháp đặc biệt (biến, lồng nhau, mixin,...) không phải CSS hợp lệ.
+
+    Các bước để chuyển SCSS → CSS:
+    +Bước 1: Cài đặt trình biên dịch SCSS
+    +Bước 2: Chạy lệnh biên dịch 
+    VD: sass style.scss style.css
+    +Bước 3: Liên kết CSS vào HTML
