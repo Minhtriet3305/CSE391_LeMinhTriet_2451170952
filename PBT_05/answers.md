@@ -73,3 +73,13 @@ CÂU A2:
     | Desktop    | ≥ 992px   | Laptop nhỏ                    | 3 - 4 cột |
     | Desktop L  | ≥ 1200px  | Desktop, laptop lớn           | 4 - 5 cột |
     | Desktop XL | ≥ 1400px  | Màn hình 4K, ultrawide        | 5 - 6 cột |
+
+CÂU A3:
+    | Chiều rộng màn hình | .container width |
+    |---------------------|------------------|
+    | 375px (iPhone SE)   | 100%             |
+    | 600px               | 540px            |
+    | 800px               | 720px            |
+    | 1000px              | 960px            |
+    | 1400px              | 1140px           |
+
