@@ -140,3 +140,36 @@ CÂU A4:
     +Bước 2: Chạy lệnh biên dịch 
     VD: sass style.scss style.css
     +Bước 3: Liên kết CSS vào HTML
+
+PHẦN B: THỰC HÀNH CODE
+BÀI B1:
+    + screenshots:
+        - 3 breakpoints:
+            -375px:  ![alt text](screenshots/375px.png)
+            -768px:  ![alt text](screenshots/768px.png)
+            -1024px:  ![alt text](screenshots/1024px.png)
+    + CSS base:
+        -CSS cho mobile:
+            body {
+                background: #f5f5f5;
+                min-height: 100vh;
+                font-size: 14px; /* Font cơ bản cho mobile */
+            }
+        -CSS cho tablet(768px):
+            @media (min-width: 768px) {
+                body {
+                    font-size: 15px;
+                }
+            }
+        -CSS cho desktop(1024px):
+            @media (min-width: 1024px) {
+                body {
+                    font-size: 16px;
+                }
+            }
+    + Navigation Responsive:
+    ![alt text](screenshots/NavMobile.png)
+    ![alt text](screenshots/NavDesktop.png)
+
+
+        
