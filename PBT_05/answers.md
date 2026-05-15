@@ -223,5 +223,129 @@ BÀI C1:
     Tiêu đề/Menu: Kích thước chuẩn dễ đọc (thường từ 12px đến 14px cho text nhỏ và 16px+ cho tiêu đề).
     Độ tương phản: Chữ trắng trên nền cam của Header cực kỳ nổi bật, đạt tiêu chuẩn về khả năng tiếp cận (Accessibility) trên màn hình lớn.
 
-    
+CÂU C2:
+    1.Kích thước mobile:
+    Ở Mobile, chúng ta ưu tiên việc cuộn trang (scrolling). Mọi thứ đều full chiều ngang để dễ đọc.
+    Header: [Logo] | [Call Icon]
+    Hero Image: Ảnh to, tràn viền.
+    Grid: 6 ảnh món ăn xếp thành 1 cột dọc (hoặc 2 cột nếu ảnh nhỏ).
+    Form: Nằm ngay dưới ảnh món ăn.
+    Map: Cuối trang.
+
+    +----------------------------+
+    | [LOGO]        [PHONE ICON] |  <-- Header: Tối giản
+    +----------------------------+
+    |                            |
+    |       HERO IMAGE           |  <-- Full width
+    |                            |
+    +----------------------------+
+    |      [FOOD PHOTO 1]        |  <-- Grid 1 cột
+    |      [FOOD PHOTO 2]        |      (Ảnh to, dễ nhìn)
+    |      [FOOD PHOTO 3]        |
+    |      [FOOD PHOTO 4]        |
+    |      [FOOD PHOTO 5]        |
+    |      [FOOD PHOTO 6]        |
+    +----------------------------+
+    |      BOOKING FORM          |  <-- Form nằm dọc
+    |  [ Ngày ] [ Giờ ]          |
+    |  [ Số người ]              |
+    |  [ Ghi chú ]               |
+    |  [[ ĐẶT BÀN NGAY ]]        |
+    +----------------------------+
+    |       GOOGLE MAPS          |  <-- Full width
+    +----------------------------+
+    |      FOOTER (Gọn)          |  <-- Ẩn bớt text phụ
+    +----------------------------+
         
+    2.Kích thước tablet:
+
+    Header: [Logo] | [Số điện thoại]
+    Grid: Chia thành 2 cột x 3 hàng.
+    Booking Section: Chia đôi: [Form đặt bàn] và [Giờ mở cửa/Thông tin].
+    Map: Tràn khung bên dưới.
+
+    +------------------------------------------+
+    |  [ LOGO ]              [ 090x.xxx.xxx ]  |
+    +------------------------------------------+
+    |                                          |
+    |              HERO IMAGE                  |
+    |                                          |
+    +------------------------------------------+
+    |  [ FOOD PHOTO 1 ]  |  [ FOOD PHOTO 2 ]   | <-- Grid 2 cột
+    |  [ FOOD PHOTO 3 ]  |  [ FOOD PHOTO 4 ]   |
+    |  [ FOOD PHOTO 5 ]  |  [ FOOD PHOTO 6 ]   |
+    +------------------------------------------+
+    |       BOOKING FORM      |   INFO / TIME  | <-- Chia đôi 
+    | [ Date ]   [ Time ]     |   Open: 8AM    |     Form & Info
+    | [ Guest ]  [ Note ]     |   Close: 10PM  |
+    |    [[ RESERVE ]]        |                |
+    +------------------------------------------+
+    |              GOOGLE MAPS                 |
+    +------------------------------------------+
+    |             FOOTER (Full)                |
+    +------------------------------------------+
+
+    3.Kích thước desktop:
+    Grid: Chia thành 3 cột x 2 hàng.
+    Layout chính (Main content): * Trái (8 cột): Hero content + Grid ảnh + Bản đồ.
+    Phải (4 cột - Sidebar): Form đặt bàn (Sticky). Khi khách cuộn xem ảnh món ăn bên trái, cái Form bên phải vẫn luôn hiện diện để họ đặt bàn bất cứ lúc nào.
+
+    +--------------------------------------------------------------+
+    | [ LOGO ]   Home  Menu  Contact          [ Hotline: 090x... ] |
+    +--------------------------------------------------------------+
+    |                                                              |
+    |                        HERO IMAGE                            |
+    |                                                              |
+    +--------------------------------------------------------------+
+    |        MAIN CONTENT (8 Cột)        |      SIDEBAR (4 Cột)    |
+    |                                    |                         |
+    |  +--- GRID MÓN ĂN (3 Cột) ---+     |    +--------------+     |
+    |  | [Ảnh 1]  [Ảnh 2]  [Ảnh 3] |     |    |   BOOKING    |     |
+    |  | [Ảnh 4]  [Ảnh 5]  [Ảnh 6] |     |    |    FORM      |     |
+    |  +---------------------------+     |    |              |     |
+    |                                    |    | (Sticky - Chạy |     |
+    |  +--- BẢN ĐỒ GOOGLE MAPS ----+     |    |  theo trang) |     |
+    |  |                           |     |    |              |     |
+    |  |          MAP HERE         |     |    +--------------+     |
+    |  +---------------------------+     |                         |
+    +--------------------------------------------------------------+
+    |                      FOOTER                                  |
+    +--------------------------------------------------------------+
+
+    CSS SKELETON:
+    /* MOBILE FIRST */
+    .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    }
+
+    .food-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 cột mobile */
+    }
+
+    /* TABLET (>= 768px) */
+    @media (min-width: 768px) {
+    .food-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột tablet */
+    }
+    }
+
+    /* DESKTOP (>= 1024px) */
+    @media (min-width: 1024px) {
+        .food-grid {
+            grid-template-columns: repeat(3, 1fr); /* 3 cột desktop */
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 8fr 4fr; /* Sidebar 4 phần */
+            gap: 30px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px; /* Form dính khi cuộn */
+        }
+    }
