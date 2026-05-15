@@ -1,0 +1,21 @@
+// Mixin cho Flexbox center
+@mixin flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Mixin cho hiệu ứng đổ bóng card
+@mixin card-style {
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+// Mixin cho Responsive (Media Queries)
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}

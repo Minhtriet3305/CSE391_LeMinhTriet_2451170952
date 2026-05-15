@@ -170,6 +170,9 @@ BÀI B1:
     + Navigation Responsive:
     ![alt text](screenshots/NavMobile.png)
     ![alt text](screenshots/NavDesktop.png)
-
+BÀI B3:
+    lệnh compile SCSS -> CSS:
+    npm install -D sass
+    npx sass styles/main.scss styles/main.css --watch
 
         
