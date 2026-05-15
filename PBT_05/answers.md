@@ -174,5 +174,54 @@ BÀI B3:
     lệnh compile SCSS -> CSS:
     npm install -D sass
     npx sass styles/main.scss styles/main.css --watch
+PHẦN C: PHÂN TÍCH
+BÀI C1:
+    Phân tích trang web Shopee
+    + Kích thước 375px: ![alt text](screenshots/375px_Shopee.png)
+    1.Navigation thay đổi thế nào: 
+    Không thay đổi gì cả. Thanh tìm kiếm, các icon danh mục, và dàn menu phía trên vẫn giữ nguyên cấu trúc của bản PC.
+    Vấn đề: Do không chuyển sang giao diện Mobile (dạng Hamburger hay Search đơn giản), thanh điều hướng bị co nhỏ lại một cách thảm hại, khiến người dùng rất khó click chính xác.
+    2. Lưới content thay đổi mấy cột?
+    Vẫn giữ nguyên số cột của Desktop: Nhìn vào phần Danh mục (Category), nó vẫn là 10 cột trên một hàng ngang.
+    Phần Flash Sale và Mall vẫn giữ nguyên tỷ lệ chia cột như trên màn hình lớn.
+    Kết quả: Các hình ảnh và icon sản phẩm bé tí hon, chữ bên dưới gần như không thể đọc được nếu không dùng thao tác "zoom" thủ công trên điện thoại.
+    3. Element nào bị ẩn trên mobile?
+    Không có element nào bị ẩn: Trong ảnh bạn gửi, tất cả các banner quảng cáo, các icon danh mục phụ, và các banner Flash Sale vẫn nằm đó.
+    Thay vì ẩn bớt các thành phần rườm rà như giao diện Mobile chuẩn, ở đây mọi thứ chỉ bị co lại để cố vừa với chiều rộng 375px.
+    4.Font size có thay đổi không?
+    Không thay đổi về giá trị (px) nhưng thay đổi về tỷ lệ hiển thị: * Trên Code vẫn là font size đó, nhưng vì trình duyệt đang ép một trang web rộng ~1200px vào màn hình 375px, nên font chữ nhìn thực tế chỉ còn khoảng 3px - 4px.
+    Chữ "Flash Sale" hay giá tiền sản phẩm trong ảnh mờ tịt, không thể đọc được nếu không căng mắt ra nhìn.
 
+    + Kích thước 768px: 
+![alt text](screenshots/768px_Shopee.png)
+    1. Navigation thay đổi thế nào?
+    Giữ nguyên 100% layout Desktop. * Không hề có sự xuất hiện của Hamburger menu hay thanh search tối giản. Các dòng text nhỏ xíu như "Kết nối", "Thông báo", "Hỗ trợ" vẫn nằm nguyên vị trí cũ.
+    Vấn đề: Ở độ phân giải 768px, các nút bấm này trở nên quá nhỏ so với kích thước đầu ngón tay người dùng
+    2. Lưới content thay đổi mấy cột?
+    Số cột danh mục: Vẫn là 10 cột/hàng.
+    Số cột Flash Sale: Vẫn hiển thị 6 sản phẩm dàn hàng ngang.
+    Nhận xét: Web không hề có cơ chế nhảy dòng (wrap) hay thay đổi số lượng cột để phù hợp với chiều ngang hẹp. Việc giữ 10 cột trên màn hình 768px khiến mỗi icon chỉ còn chiếm một diện tích rất bé, nhìn cực kỳ rối mắt.
+    3.Element nào bị ẩn trên mobile?
+    Không có element nào bị ẩn.
+    Thông thường, khi xuống 768px, các banner quảng cáo phụ hoặc các thành phần ít quan trọng sẽ được ẩn đi. Nhưng ở đây, Shopee vẫn hiển thị đầy đủ từ Slider chính, banner phụ bên phải đến các icon dịch vụ nhỏ phía dưới banner. Layout bị "nhồi nhét" y hệt bản PC.
+    4.Font size có thay đổi không?
+    Font size hệ thống không thay đổi, vì trình duyệt đang ép một trang web (vốn có chiều rộng chuẩn khoảng 1200px) vào không gian 768px, nên font chữ bị tỉ lệ thuận thu nhỏ lại.
+    Các nhãn chữ dưới danh mục như "Thời Trang Nam", "Điện Thoại & Phụ Kiện" rất khó để đọc được nội dung nếu không phóng to màn hình.
+
+    +Kích thước 1440px:
+![alt text](screenshots/1440px_Shopee.png)
+    1. Navigation thay đổi thế nào?
+    Ở kích thước 1440 thì các nút bấm có khoảng cách, font chữ rõ ràng, dễ thao tác bằng chuột.
+    2. Lưới content thay đổi mấy cột?
+    Banner chính: Chia theo tỷ lệ khoảng 2/3 cho Slider lớn bên trái và 1/3 cho 2 banner nhỏ xếp chồng bên phải.
+    Hệ thống Icon dịch vụ: Dàn hàng ngang phía dưới banner với đầy đủ text và hình ảnh minh họa rõ nét.
+    Tỉ lệ: Ở mức 1440px, các thành phần nội dung tập trung vào khu vực giữa (container), hai bên lề có khoảng trống để cân bằng thị giác.
+    3. Element nào bị ẩn?
+    Hiển thị đầy đủ 100% các tính năng và quảng cáo.
+    Các hiệu ứng hover (khi di chuột vào) và các menu thả xuống (Dropdown) hoạt động đầy đủ trên trình duyệt PC.
+    4.Font size thay đổi thế nào?
+    Tiêu đề/Menu: Kích thước chuẩn dễ đọc (thường từ 12px đến 14px cho text nhỏ và 16px+ cho tiêu đề).
+    Độ tương phản: Chữ trắng trên nền cam của Header cực kỳ nổi bật, đạt tiêu chuẩn về khả năng tiếp cận (Accessibility) trên màn hình lớn.
+
+    
         
