@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Bootstrap E-Commerce Landing</title>
+  <!-- Bootstrap 5 CSS + Icons + (tùy chọn theme cơ bản) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (cho cart, search) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- style chỉ để thay đổi màu sắc / ảnh nền hero (theo yêu cầu: cho ảnh/colors cải biệt, nhưng KHÔNG layout) -->
+  <style>
+    /* Chỉ các tùy chỉnh về ảnh hero demo, màu nền nhẹ cho footer, không ảnh hưởng layout dùng grid/utilities */
+    .carousel-item {
+      background-color: #2c3e50; /* fallback cho slide thiếu ảnh */
+    }
+    .carousel-item img {
+      object-fit: cover;
+      height: 500px;
+      filter: brightness(0.75);
+    }
+    /* tùy chỉnh màu badge riêng (giữ bg-danger nhưng thêm chút hiệu ứng) */
+    .badge.bg-danger {
+      font-size: 0.8rem;
+      padding: 0.4em 0.8em;
+    }
+    /* card img giữ tỷ lệ */
+    .card-img-top {
+      object-fit: cover;
+      height: 220px;
+    }
+    /* ẩn scroll modal body nếu cần */
+    .modal-body img {
+      max-height: 300px;
+      object-fit: cover;
+      width: 100%;
+    }
+    /* tăng nhẹ footer link */
+    footer a {
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    /* đảm bảo carousel caption responsive */
+    @media (max-width: 576px) {
+      .carousel-item img {
+        height: 300px;
+      }
+      .carousel-caption h5 {
+        font-size: 1.2rem;
+      }
+    }
+    /* điều chỉnh border radius card */
+    .card {
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    /* override pure bootstrap utilities, không có layout custom */
+    body {
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold text-dark" href="#">
+      <i class="bi bi-bag-check fs-3 me-1"></i> ShopStyle
+    </a>
+    <!-- toggler mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- menu + search + cart -->
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Khuyến mãi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+      </ul>
+      <form class="d-flex me-2" role="search">
+        <input class="form-control me-1" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+      <a href="#" class="btn btn-outline-dark position-relative" data-bs-toggle="modal" data-bs-target="#cartModalPreview">
+        <i class="bi bi-cart3"></i> <span class="badge bg-danger rounded-pill ms-1">3</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================== HERO CAROUSEL (3 slides) ======================== -->
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <!-- Slide 1 -->
+    <div class="carousel-item active">
+      <!-- Ảnh placeholder từ unsplash dùng free stock (có thể thay đổi url nhưng giữ overlay) -->
+      <img src="https://picsum.photos/id/20/1900/600" class="d-block w-100" alt="Bộ sưu tập mùa hè">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h5 class="text-white">Bộ sưu tập Exclusive</h5>
+        <p class="text-white-50">Giảm đến 50% cho thành viên mới</p>
+        <a href="#" class="btn btn-danger">Mua ngay</a>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="carousel-item">
+      <img src="https://picsum.photos/id/26/1900/600" class="d-block w-100" alt="Thời trang công sở">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h5 class="text-white">Phong cách thanh lịch</h5>
+        <p class="text-white-50">Áo sơ mi, đầm công sở cao cấp</p>
+        <a href="#" class="btn btn-warning">Khám phá</a>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="carousel-item">
+      <img src="https://picsum.photos/id/30/1900/600" class="d-block w-100" alt="Phụ kiện thời trang">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h5 class="text-white">Phụ kiện độc đáo</h5>
+        <p class="text-white-50">Kính mát, túi xách, giày dép cao cấp</p>
+        <a href="#" class="btn btn-outline-light">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- ======================== PRODUCT GRID ======================== -->
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Sản phẩm nổi bật</h2>
+    <p class="text-secondary">Ưu đãi cực sốc cuối năm - Số lượng có hạn</p>
+  </div>
+
+  <!-- grid: row + col — 4 cột desktop (col-lg-3), 2 cột tablet (col-md-6), 1 cột mobile (col-12) -->
+  <div class="row g-4">
+    <!-- Product Card 1 (có Sale) -->
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+        <div class="position-relative">
+          <img src="https://picsum.photos/id/1/400/300" class="card-img-top" alt="Áo thun basic">
+          <span class="badge bg-danger position-absolute top-0 end-0 m-2 rounded-pill">-20% Sale</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title fw-semibold">Áo thun cotton</h5>
+          <p class="card-text text-secondary">Chất liệu mềm mại, thoáng mát, nhiều màu sắc.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-danger fw-bold">240.000đ</span>
+              <span class="text-decoration-line-through text-muted ms-2 small">300.000đ</span>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="1">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Product Card 2 (Sale) -->
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <div class="position-relative">
+          <img src="https://picsum.photos/id/20/400/300" class="card-img-top" alt="Quần jean">
+          <span class="badge bg-danger position-absolute top-0 end-0 m-2 rounded-pill">-15% Sale</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Quần jeans rách</h5>
+          <p class="card-text">Phong cách cá tính, co giãn tốt, phù hợp dạo phố.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-danger fw-bold">510.000đ</span>
+              <span class="text-decoration-line-through text-muted ms-2 small">600.000đ</span>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="2">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Product Card 3 (không sale) -->
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <img src="https://picsum.photos/id/30/400/300" class="card-img-top" alt="Giày thể thao">
+        <div class="card-body">
+          <h5 class="card-title">Giày thể thao nam</h5>
+          <p class="card-text">Đế cao su, êm chân, chống trơn trượt.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-success">790.000đ</span>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="3">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Product Card 4 (Sale) -->
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <div class="position-relative">
+          <img src="https://picsum.photos/id/42/400/300" class="card-img-top" alt="Túi xách nữ">
+          <span class="badge bg-danger position-absolute top-0 end-0 m-2 rounded-pill">-30% Sale</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Túi xách thời trang</h5>
+          <p class="card-text">Da PU cao cấp, thiết kế thanh lịch.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-danger fw-bold">630.000đ</span>
+              <span class="text-decoration-line-through text-muted ms-2 small">900.000đ</span>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="4">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hàng thứ hai (4 sản phẩm khác để minh họa đủ lưới) - vẫn dùng grid -->
+  <div class="row g-4 mt-2">
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <img src="https://picsum.photos/id/15/400/300" class="card-img-top" alt="Mũ lưỡi trai">
+        <div class="card-body">
+          <h5 class="card-title">Mũ lưỡi trai unisex</h5>
+          <p class="card-text">Chất vải thô, form phù hợp mọi khuôn mặt.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-bold">150.000đ</span>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="5">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <div class="position-relative">
+          <img src="https://picsum.photos/id/26/400/300" class="card-img-top" alt="Đồng hồ nam">
+          <span class="badge bg-danger position-absolute top-0 end-0 m-2 rounded-pill">Sale 10%</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Đồng hồ thể thao</h5>
+          <p class="card-text">Mặt kính khoáng, chống nước 5ATM.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div><span class="text-danger fw-bold">1.250.000đ</span><span class="text-decoration-line-through text-muted ms-1 small">1.390.000đ</span></div>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="6">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <img src="https://picsum.photos/id/96/400/300" class="card-img-top" alt="Kính mát">
+        <div class="card-body">
+          <h5 class="card-title">Kính râm phân cực</h5>
+          <p class="card-text">Chống UV400, nhẹ, thời thượng.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-bold">350.000đ</span>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="7">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <img src="https://picsum.photos/id/39/400/300" class="card-img-top" alt="Ba lô">
+        <div class="card-body">
+          <h5 class="card-title">Balô chống nước</h5>
+          <p class="card-text">Dung tích 25L, đựng laptop 15.6 inch.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-bold">520.000đ</span>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" data-product-id="8">Xem nhanh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== FOOTER (4 cột grid) ======================== -->
+<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+  <div class="container">
+    <div class="row gy-4">
+      <!-- Cột 1: Thông tin công ty -->
+      <div class="col-md-6 col-lg-3">
+        <h5 class="text-uppercase fw-bold mb-3"><i class="bi bi-shop"></i> ShopStyle</h5>
+        <p>Thương hiệu thời trang hàng đầu Việt Nam, cam kết chất lượng và phong cách đẳng cấp.</p>
+        <p><i class="bi bi-geo-alt-fill me-2"></i> 123 Đường Láng, Đống Đa, Hà Nội</p>
+        <p><i class="bi bi-telephone-fill me-2"></i> 1900 1234</p>
+      </div>
+      <!-- Cột 2: Hỗ trợ -->
+      <div class="col-md-6 col-lg-3">
+        <h5 class="text-uppercase fw-bold mb-3">Hỗ trợ</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white-50 text-decoration-none">Hướng dẫn mua hàng</a></li>
+          <li class="mt-2"><a href="#" class="text-white-50 text-decoration-none">Chính sách đổi trả</a></li>
+          <li class="mt-2"><a href="#" class="text-white-50 text-decoration-none">Vận chuyển & giao nhận</a></li>
+          <li class="mt-2"><a href="#" class="text-white-50 text-decoration-none">Bảo mật thông tin</a></li>
+        </ul>
+      </div>
+      <!-- Cột 3: Chính sách -->
+      <div class="col-md-6 col-lg-3">
+        <h5 class="text-uppercase fw-bold mb-3">Chính sách</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white-50">Chính sách bảo hành</a></li>
+          <li class="mt-2"><a href="#" class="text-white-50">Chính sách thành viên</a></li>
+          <li class="mt-2"><a href="#" class="text-white-50">Chương trình đối tác</a></li>
+          <li class="mt-2"><a href="#" class="text-white-50">Tuyển dụng</a></li>
+        </ul>
+      </div>
+      <!-- Cột 4: Kết nối mạng xã hội -->
+      <div class="col-md-6 col-lg-3">
+        <h5 class="text-uppercase fw-bold mb-3">Theo dõi</h5>
+        <p>Cập nhật xu hướng mới nhất và nhận voucher giảm giá.</p>
+        <div class="d-flex gap-3 fs-4">
+          <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-tiktok"></i></a>
+        </div>
+        <div class="mt-3">
+          <p class="mb-1 small">Nhận bản tin khuyến mãi:</p>
+          <div class="input-group">
+            <input type="email" class="form-control form-control-sm" placeholder="Email của bạn">
+            <button class="btn btn-danger btn-sm" type="button">ĐK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="bg-secondary mt-4">
+    <div class="text-center pb-2">
+      <span class="text-white-50">&copy; 2025 ShopStyle - Mọi quyền được bảo lưu.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================== MODAL (xem nhanh chi tiết sản phẩm) ======================== -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h5 class="modal-title fw-bold" id="productModalLabel">Chi tiết sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <!-- nội dung động sẽ thay đổi bằng js -->
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <img id="modalProductImg" src="https://picsum.photos/id/1/400/300" class="img-fluid rounded shadow" alt="product detail">
+          </div>
+          <div class="col-md-6">
+            <h3 id="modalProductTitle">Áo thun cotton</h3>
+            <p id="modalProductDesc" class="text-secondary mt-2">Chất liệu cotton 100%, thoáng mát, thấm hút mồ hôi tốt. Sản phẩm được yêu thích bởi thiết kế đơn giản.</p>
+            <div class="my-3">
+              <span id="modalProductPrice" class="h4 text-danger fw-bold">240.000đ</span>
+              <span id="modalProductOldPrice" class="text-decoration-line-through text-muted ms-2"></span>
+            </div>
+            <div><span class="badge bg-success me-2">Còn hàng</span> <span class="badge bg-warning text-dark">Giao hàng miễn phí</span></div>
+            <hr>
+            <p><i class="bi bi-check-circle-fill text-success"></i> Chính hãng 100%</p>
+            <p><i class="bi bi-arrow-repeat"></i> Đổi trả trong 30 ngày</p>
+            <div class="d-flex gap-2 mt-4">
+              <button class="btn btn-danger flex-grow-1">Thêm vào giỏ</button>
+              <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal giỏ hàng preview (tùy chọn chỉ là demo icon cart mở modal nhỏ, không bắt buộc chi tiết nhưng đảm bảo hiện dialog) -->
+<div class="modal fade" id="cartModalPreview" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel">Giỏ hàng của bạn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có <strong>3 sản phẩm</strong> trong giỏ hàng.</p>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">Áo thun cotton <span>240.000đ</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Quần jeans rách <span>510.000đ</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Mũ lưỡi trai <span>150.000đ</span></li>
+        </ul>
+        <p class="mt-3 fw-bold">Tổng tạm tính: 900.000đ</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tiếp tục mua</button>
+        <button type="button" class="btn btn-danger">Thanh toán</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS + Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

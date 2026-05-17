@@ -40,5 +40,6 @@ CÂU A2:
     .container: * Có độ rộng cố định (max-width) thay đổi nhảy theo từng breakpoint (576px, 768px, 992px,).Trên màn hình cực nhỏ (576px), nó sẽ tự động tràn 100% chiều rộng. Nó luôn tự căn giữa trang nhờ lề trái/phải tự động.
 
     .container-fluid: * Luôn luôn chiếm 100% chiều rộng của màn hình (width: 100%) ở mọi cấp độ kích thước, từ điện thoại siêu nhỏ cho đến màn hình tivi lớn. Không bị giới hạn bởi các mốc breakpoint.
-    
+
     .container-md: * Sẽ tràn viền 100% chiều rộng trên các màn hình nhỏ hơn mức Medium (768px).Khi màn hình đạt từ mức md trở lên ( 768px), nó bắt đầu hoạt động giống hệt như .container thông thường (độ rộng bị giới hạn cố định theo từng nấc breakpoint tiếp theo).
+
