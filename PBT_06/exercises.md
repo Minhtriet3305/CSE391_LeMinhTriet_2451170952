@@ -43,3 +43,14 @@ CÂU A2:
 
     .container-md: * Sẽ tràn viền 100% chiều rộng trên các màn hình nhỏ hơn mức Medium (768px).Khi màn hình đạt từ mức md trở lên ( 768px), nó bắt đầu hoạt động giống hệt như .container thông thường (độ rộng bị giới hạn cố định theo từng nấc breakpoint tiếp theo).
 
+PHẦN C: PHÂN TÍCH 
+CÂU C1:
+    1.
+    Để thay đổi màu $primary từ xanh dương mặc định sang mã màu mới là #E63946, quy trình chuẩn là can thiệp vào mã nguồn SASS (.scss) của Bootstrap trước khi biên dịch, thay vì chỉnh sửa trực tiếp trên file CSS đã đóng gói.
+    -Công cụ chuẩn bị: Trình biên dịch SASS (SASS Compiler): Có thể sử dụng Extension Live Sass Compiler trên VS Code hoặc cài đặt gói sass thông qua dòng lệnh npm.
+    2.
+    - Khi override .btn-primary { background: red; } thì hover, focus, active vẫn giữ màu cũ → giao diện sai.
+    - Nếu nhiều file CSS, dễ bị đè qua đè lại, phải dùng !important rất bẩn.
+    - Các class liên quan như .bg-primary, .text-primary không thay đổi theo → mất đồng bộ.
+    - Khó nâng cấp Bootstrap sau này.
+
