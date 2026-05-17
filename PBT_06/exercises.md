@@ -53,4 +53,141 @@ CÂU C1:
     - Nếu nhiều file CSS, dễ bị đè qua đè lại, phải dùng !important rất bẩn.
     - Các class liên quan như .bg-primary, .text-primary không thay đổi theo → mất đồng bộ.
     - Khó nâng cấp Bootstrap sau này.
+CÂU C2:
+    CSS thuần để tạo navbar responsive và product card:
+    /* Navbar */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
 
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    }
+
+    .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    }
+
+    .nav-links a {
+    color: white;
+    text-decoration: none;
+    }
+
+    .menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    }
+
+    /* Product Card */
+    .card {
+    width: 280px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    }
+
+    .card-body {
+    padding: 1rem;
+    }
+
+    .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .card-price {
+    color: red;
+    font-weight: bold;
+    }
+
+    .btn {
+    background: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+        .nav-links {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+            padding-top: 1rem;
+        }
+        .nav-links.active {
+            display: flex;
+        }
+    }
+    - Bootstrap version:
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Product Card -->
+    <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Product name</h5>
+        <p class="card-text">$19.99</p>
+        <a href="#" class="btn btn-primary">Buy now</a>
+    </div>
+    </div>
+
+    +-----------------------------+----------------------------------+--------------------------------+
+    |         Tiêu chí            |         CSS thuần               |          Bootstrap             |
+    +-----------------------------+----------------------------------+--------------------------------+
+    | Số dòng CSS cần viết        | Khoảng 50-60 dòng                | 0 dòng (chỉ import CDN)        |
+    +-----------------------------+----------------------------------+--------------------------------+
+    | Thời gian phát triển        | Lâu, phải tự xử lý responsive    | Rất nhanh, gần như copy class  |
+    +-----------------------------+----------------------------------+--------------------------------+
+    | Khả năng tùy biến           | Tùy biến hoàn toàn               | Khó tùy biến, dễ sinh lỗi đè   |
+    +-----------------------------+----------------------------------+--------------------------------+
+
+    Khi nào nên dùng bootstrap?
+    - Khi làm prototype hoặc đồ án nhanh trong thời gian ngắn.
+    - Khi không tốt ở CSS lắm, muốn có giao diện ổn mà không cần viết nhiều.
+    - Khi cần responsive ngay lập tức mà không muốn tự viết media query.
+    - Làm các trang admin dashboard hoặc form nhập liệu (Bootstrap có sẵn nhiều component).
+    Khi nào không nên dùng bootstrap?
+    - Khi cần giao diện hoàn toàn độc đáo, không giống web nào.
+    - Khi tối ưu hiệu năng (Bootstrap khá nặng, nhiều CSS/JS không dùng đến).
+    - Khi muốn học CSS thuần để hiểu bản chất.
+    - Khi làm web mobile-first nhẹ hoặc web cực kỳ đơn giản (vài component) thì viết tay nhanh hơn.
