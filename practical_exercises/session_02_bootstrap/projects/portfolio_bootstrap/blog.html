@@ -135,41 +135,44 @@
         </div>
     </section>
 
-    <div class="comments-section p-4 border border-dark">
-        <h5 class="mb-4">3 Comments</h5>
+    <div class="comments-section border border-dark rounded-4">
+        <div class="p-3 p-md-4 p-lg-5 px-2 px-sm-3 px-md-4 px-lg-5">
+            <h5 class="mb-3 mb-md-4">3 Comments</h5>
 
-        <!-- Parent Comment -->
-        <div class="comment mb-4">
-            <div class="d-flex">
-                <img src="https://via.placeholder.com/50" class="rounded-circle me-3" alt="Avatar">
-                <div class="flex-grow-1">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">John Doe</h6>
-                        <small class="text-muted">2 hours ago</small>
-                    </div>
-                    <p class="mb-2">Great article! Very helpful for beginners.</p>
-                    <button class="btn btn-sm btn-link text-decoration-none">
-                        <i class="bi bi-reply"></i> Reply
-                    </button>
+            <!-- Nội dung comments -->
+            <div class="comment mb-3 mb-md-4">
+                <div class="d-flex flex-column flex-sm-row">
+                    <!-- Avatar sẽ ở trên mobile, bên cạnh trên tablet/desktop -->
+                    <img src="https://via.placeholder.com/50" class="rounded-circle me-sm-3 mb-2 mb-sm-0" alt="Avatar"
+                        width="50" height="50">
+                    <div class="flex-grow-1">
+                        <div class="d-flex flex-wrap justify-content-between align-items-start">
+                            <h6 class="mb-0 me-2">John Doe</h6>
+                            <small class="text-muted">2 hours ago</small>
+                        </div>
+                        <p class="mb-2 mt-1">Great article! Very helpful for beginners.</p>
+                        <button class="btn btn-sm btn-link text-decoration-none p-0">
+                            <i class="bi bi-reply"></i> Reply
+                        </button>
 
-                    <!-- Nested Reply -->
-                    <div class="comment reply ms-5 mt-3">
-                        <div class="d-flex">
-                            <img src="https://via.placeholder.com/40" class="rounded-circle me-3" alt="Avatar">
-                            <div class="flex-grow-1">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h6 class="mb-0">Author</h6>
-                                    <small class="text-muted">1 hour ago</small>
+                        <!-- Reply (đã responsive) -->
+                        <div class="comment reply mt-3" style="margin-left: 10%;">
+                            <div class="d-flex flex-column flex-sm-row">
+                                <img src="https://via.placeholder.com/40" class="rounded-circle me-sm-3 mb-2 mb-sm-0"
+                                    alt="Avatar" width="40" height="40">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-start">
+                                        <h6 class="mb-0 me-2">Author</h6>
+                                        <small class="text-muted">1 hour ago</small>
+                                    </div>
+                                    <p class="mb-2 mt-1">Thank you! Glad it helped.</p>
                                 </div>
-                                <p class="mb-2">Thank you! Glad it helped.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- More comments... -->
     </div>
 
 
