@@ -7,6 +7,54 @@
     <title>Portfolio - Bootstrap Conversion</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <style>
+        :root {
+            /* Primary: Teal */
+            --bs-primary: #14b8a6;
+            --bs-primary-hover: #0d9488;
+            --bs-primary-rgb: 20, 184, 166;
+
+            /* Secondary: Slate */
+            --bs-secondary: #64748b;
+            --bs-secondary-rgb: 100, 116, 139;
+
+            /* Custom colors */
+            --custom-success: #22c55e;
+            --custom-warning: #f59e0b;
+            --custom-danger: #ef4444;
+
+            /* Typography */
+            --bs-body-font-family: 'Inter', system-ui, sans-serif;
+            --bs-body-font-size: 1rem;
+            --bs-body-line-height: 1.6;
+
+            /* Border radius */
+            --bs-border-radius: 0.5rem;
+            --bs-border-radius-sm: 0.375rem;
+            --bs-border-radius-lg: 1rem;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--bs-primary-hover);
+            border-color: var(--bs-primary-hover);
+        }
+
+        /* Card styles */
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Navbar styles */
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 
