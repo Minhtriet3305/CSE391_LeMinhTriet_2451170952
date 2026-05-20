@@ -71,6 +71,27 @@
         console.log("'42' là:", typeof "42");      // string
         console.log("true là:", typeof true);      // boolean
 
+        //Template Literal
+        let sanPham = "Laptop";
+        let soLuong = 2;
+        let donGia = 15000000;
+
+        let announcement = `
+        =========HÓA ĐƠN=========
+        Tên sản phẩm: ${sanPham}
+        Số lượng: ${soLuong}
+        Đơn giá: ${donGia}
+        Tổng tiền: ${soLuong * donGia}
+        `
+        console.log(announcement);
+
+        //
+        const PI = 3.14159;
+        let banKinh = 5;
+
+        console.log("Diện tích: ",PI * (banKinh * banKinh));
+        console.log("Chu vi: ",2 * PI * banKinh);
+
     </script>
 </body>
 
