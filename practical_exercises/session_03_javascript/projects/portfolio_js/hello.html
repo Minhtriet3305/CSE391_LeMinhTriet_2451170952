@@ -36,6 +36,41 @@
         var monHoc = "CSE391";
         console.log("Môn:", monHoc);
 
+        //DATA TYPE
+        //string
+        let hoTen1 = "Nguyễn Văn A";
+        let diaChi = 'Hà Nội';
+        let loiChao = `Xin chào ${hoTen}`;
+
+        console.log(typeof hoTen1);
+        console.log(loiChao);
+
+        //number
+        let soNguyen = 42;
+        let soThuc = 3.14;
+        let am = -10;
+        let voCuc = Infinity;
+
+        console.log(typeof soNguyen);
+
+        //boolean
+        let laTrue = true;
+        let laFalse = false;
+
+        console.log(typeof laTrue);
+
+        //null & undefined
+        let giaTriNull = null;          // "không có gì" (cố tình)
+        let chuaGanGiaTri;              // undefined (chưa gán)
+
+        console.log(typeof giaTriNull);   // "object" (bug nổi tiếng của JS!)
+        console.log(typeof chuaGanGiaTri); // "undefined"
+
+        //check data types
+        console.log("42 là:", typeof 42);          // number
+        console.log("'42' là:", typeof "42");      // string
+        console.log("true là:", typeof true);      // boolean
+
     </script>
 </body>
 
