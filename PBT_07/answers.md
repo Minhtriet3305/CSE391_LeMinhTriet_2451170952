@@ -26,3 +26,38 @@ CÂU A1:
 | **Đoạn 5** | Trong block: `2`<br>Ngoài block: `1` | Trong block: `2`<br>Ngoài block: `1` | Khớp 100% | Từ khóa `let` tuân thủ nghiêm ngặt Block Scope (Phạm vi khối lệnh). |
 
 CÂU A2:
+
+```javascript
+console.log(typeof null);              // object
+console.log(typeof undefined);         // undefined
+console.log(typeof NaN);              // number
+console.log("5" + 3);                 // 53
+console.log("5" - 3);                 // 2
+console.log("5" * "3");              // 15
+console.log(true + true);            // 2
+console.log([] + []);                // ""
+console.log([] + {});                // "[object Object]"
+console.log({} + []);                // "[object Object]" hoặc 0
+```
+
+Trường hợp 1: "5" + 3 ➔ Kết quả: "53" (Kiểu String)
+    + Cơ chế: Toán tử + trong JavaScript đóng hai vai trò: Phép cộng toán học và Phép nối chuỗi.
+    + Quy tắc: Nếu ít nhất một trong hai vế của toán tử + là một chuỗi (String), JavaScript sẽ ưu tiên chuyển vế còn lại thành chuỗi và thực hiện phép nối chuỗi.
+    + Quá trình xử lý: Số 3 bị ép kiểu tự động thành chuỗi "3". Phép toán trở thành "5" + "3", nối lại thành "53".
+
+Trường hợp 2: "5" - 3 ➔ Kết quả: 2 (Kiểu Number)
+    + Cơ chế: Khác với toán tử +, toán tử - (trừ), * (nhân), / (chia) chỉ có duy nhất một vai trò là thực hiện các phép tính toán học. Trong JavaScript không hề tồn tại khái niệm "trừ chuỗi".
+    + Quy tắc: Khi gặp các toán tử toán học thuần túy này, JavaScript bắt buộc phải ép kiểu (convert) các vế không phải là số về dạng Number để tính toán.
+    + Quá trình xử lý: Chuỗi "5" được ép kiểu tự động thành số 5. Phép toán trở thành 5 - 3, kết quả trả về số 2.
+
+CÂU A3:
+```javascript
+console.log(5 == "5");                // ???
+console.log(5 === "5");               // ???
+console.log(null == undefined);       // ???
+console.log(null === undefined);      // ???
+console.log(NaN == NaN);             // ???
+console.log(0 == false);             // ???
+console.log(0 === false);            // ???
+console.log("" == false);            // ???
+```
