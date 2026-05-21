@@ -51,13 +51,16 @@ Trường hợp 2: "5" - 3 ➔ Kết quả: 2 (Kiểu Number)
     + Quá trình xử lý: Chuỗi "5" được ép kiểu tự động thành số 5. Phép toán trở thành 5 - 3, kết quả trả về số 2.
 
 CÂU A3:
-```javascript
-console.log(5 == "5");                // ???
-console.log(5 === "5");               // ???
-console.log(null == undefined);       // ???
-console.log(null === undefined);      // ???
-console.log(NaN == NaN);             // ???
-console.log(0 == false);             // ???
-console.log(0 === false);            // ???
-console.log("" == false);            // ???
 ```
+console.log(5 == "5");                // true
+console.log(5 === "5");               // false
+console.log(null == undefined);       // true
+console.log(null === undefined);      // false
+console.log(NaN == NaN);             // false
+console.log(0 == false);             // true
+console.log(0 === false);            // false
+console.log("" == false);            // true
+```
+Quy tắc từ giờ trở đi không nên dùng == . Vì; 
++ === không ép kiểu → Kết quả dự đoán được, không có "bẫy"
++ == có nhiều quy tắc ép kiểu phức tạp, dễ gây bug khó tìm
