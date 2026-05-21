@@ -75,3 +75,18 @@ if (0) console.log("F");             //  KHÔNG (0 là falsy)
 if (-1) console.log("G");            //  IN (-1 là truthy)
 if (" ") console.log("H");           //  IN (dấu cách là truthy - vì nó KHÔNG rỗng)
 
+CÂU A5:
+// Cách 1:
+var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;
+
+// Cách 2:
+var url = `https://api.example.com/users/${userId}/orders?page=${page}`;
+
+// Cách 3:
+var html = `
+  <div class="card">
+    <h2>${title}</h2>
+    <p>${description}</p>
+    <span>Giá: ${price}đ</span>
+  </div>
+`;
