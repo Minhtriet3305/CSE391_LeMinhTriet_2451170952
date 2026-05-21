@@ -7,3 +7,4 @@
   + PBT_03: Đã hoàn thành phần A ,B và C
   + PBT_04: Đã hoàn thành phần A ,B và C
   + PBT_05: Đã hoàn thành phần A ,B và C
+  + PBT_06: Đã hoàn thành phần A ,B và C
