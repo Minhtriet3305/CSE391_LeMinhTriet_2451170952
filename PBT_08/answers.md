@@ -130,3 +130,22 @@ CÂU A3:
 
     // 8. Đảo ngược mảng không mutate gốc (Dùng toán tử spread [...] để clone ra mảng mới rồi mới .reverse())
     const reversed = [...nums].reverse();
+
+CÂU A4:
+
+    // Destructuring
+    const { name, price, specs: { ram, color } } = product;
+    console.log(name, price, ram, color);  // iPhone 16 25990000 8 Titan
+    console.log(specs);                     // ReferenceError: specs is not defined
+
+    // Spread
+    const updated = { ...product, price: 23990000, sale: true };
+    console.log(updated.price);            // 23990000
+    console.log(updated.sale);             // true
+    console.log(product.price);            // 25990000 (gốc KHÔNG đổi)
+
+    // Spread gotcha
+    const copy = { ...product };
+    copy.specs.ram = 16;
+    console.log(product.specs.ram);        // 16 (Bị đổi thành 16!)
+
