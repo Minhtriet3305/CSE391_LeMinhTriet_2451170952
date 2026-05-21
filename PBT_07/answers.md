@@ -91,3 +91,65 @@ var html = `
   </div>
 `;
 
+PHẦN C: SUY LUẬN
+CÂU C1:
+    + Lỗi 1: Thiếu dấu chấm phẩy
+    + Sửa lỗi: 
+        // Sai
+        return "Phần trăm giảm không hợp lệ"
+
+        // Đúng
+        return "Phần trăm giảm không hợp lệ";
+
+    +Lỗi 2:Dùng toán tử gán = thay vì toán tử so sánh ===
+    + Sửa lỗi:
+        // Sai - Đây là gán giá trị, không phải so sánh
+        if (giaSauGiam = 0)
+
+        // Đúng - So sánh bằng
+        if (giaSauGiam === 0)
+    
+    + Lỗi 3:Thiếu dấu chấm phẩy
+    + Sửa lỗi:
+        // Sai
+    var giamGia = giaBan * phanTramGiam / 100
+
+        // Đúng
+    var giamGia = giaBan * phanTramGiam / 100;
+
+    + Lỗi 4:Thiếu dấu chấm phẩy
+    + Sửa lỗi: 
+    // Sai
+    let giaSauGiam = giaBan - giamGia
+
+    // Đúng
+    let giaSauGiam = giaBan - giamGia;
+
+    +Lỗi 5: Truyền tham số sai kiểu dữ liệu
+    + Sửa lỗi:
+    // Sai - "100000" là string
+    const gia = tinhGiaGiamGia("100000", 20)
+
+    // Đúng - Phải là number
+    const gia = tinhGiaGiamGia(100000, 20)
+
+    +Lỗi 6: Lỗi "ẩn" với var trong vòng lặp kết hợp setTimeout (closure)
+    + Giải thích: 
+        - var có function scope, không tạo scope mới mỗi lần lặp
+        - setTimeout chạy sau 1 giây, lúc đó vòng lặp đã kết thúc
+        - Biến i lúc này = 5 (vì var i chỉ có 1 biến duy nhất)
+    +Sửa lỗi:
+    // Sai
+    // Kết quả: in ra 5 lần "Item 5" (chứ không phải 0,1,2,3,4)
+    for (var i = 0; i < 5; i++) {
+        setTimeout(function() {
+            console.log("Item " + i)
+        }, 1000)
+    }
+
+    // Đúng - Dùng let (block scope)
+    for (let i = 0; i < 5; i++) {
+        setTimeout(function() {
+            console.log("Item " + i)
+        }, 1000)
+    }
