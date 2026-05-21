@@ -151,6 +151,7 @@ CÂU A4:
 
 PHẦN C: SUY LUẬN
 CÂU C1:
+    
     const processOrders = (orders) => 
     orders
         .filter(({ status, total }) => status === "completed" && total > 100000)
@@ -161,4 +162,53 @@ CÂU C1:
         }))
         .sort((a, b) => b.finalTotal - a.price);
     
+CÂU C2:
+    const miniArray = {
+        // 1. Tự viết map: Biến đổi từng phần tử và trả về mảng mới có độ dài bằng mảng cũ
+        map(arr, fn) {
+            const result = [];
+            for (let i = 0; i < arr.length; i++) {
+                // fn nhận vào: phần tử hiện tại, chỉ số index, và mảng gốc
+                result.push(fn(arr[i], i, arr));
+            }
+            return result;
+        },
+
+        // 2. Tự viết filter: Lọc các phần tử thỏa mãn điều kiện (fn trả về true)
+        filter(arr, fn) {
+            const result = [];
+            for (let i = 0; i < arr.length; i++) {
+                // Nếu hàm callback trả về giá trị truthy, giữ phần tử đó lại
+                if (fn(arr[i], i, arr)) {
+                    result.push(arr[i]);
+                }
+            }
+            return result;
+        },
+
+        // 3. Tự viết reduce: Tích lũy mảng thành một giá trị duy nhất
+        reduce(arr, fn, initialValue) {
+            // Kiểm tra xem người dùng có truyền vào initialValue hay không
+            // (Không thể chỉ check `initialValue === undefined` vì lỡ người dùng truyền vào undefined thật)
+            const hasInitialValue = arguments.length >= 3;
+            
+            // Nếu mảng rỗng và không có giá trị khởi tạo -> Báo lỗi y hệt spec của JS gốc
+            if (arr.length === 0 && !hasInitialValue) {
+                throw new TypeError("Reduce of empty array with no initial value");
+            }
+
+            // Nếu có initialValue thì bắt đầu tích lũy từ nó, ngược lại lấy phần tử đầu tiên của mảng làm gốc
+            let accumulator = hasInitialValue ? initialValue : arr[0];
+            
+            // Nếu không có initialValue, vòng lặp sẽ bỏ qua phần tử đầu tiên (chạy từ index 1)
+            const startIndex = hasInitialValue ? 0 : 1;
+
+            for (let i = startIndex; i < arr.length; i++) {
+                // Cập nhật accumulator bằng kết quả trả về của hàm callback
+                accumulator = fn(accumulator, arr[i], i, arr);
+            }
+
+            return accumulator;
+        }
+    };
 
