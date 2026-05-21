@@ -64,3 +64,14 @@ console.log("" == false);            // true
 Quy tắc từ giờ trở đi không nên dùng == . Vì; 
 + === không ép kiểu → Kết quả dự đoán được, không có "bẫy"
 + == có nhiều quy tắc ép kiểu phức tạp, dễ gây bug khó tìm
+
+CÂU A4:
+if ("0") console.log("A");           //  IN (chuỗi "0" là truthy)
+if ("") console.log("B");            //  KHÔNG (chuỗi rỗng là falsy)
+if ([]) console.log("C");            //  IN (mảng rỗng là truthy)
+if ({}) console.log("D");            //  IN (object rỗng là truthy)
+if (null) console.log("E");          //  KHÔNG (null là falsy)
+if (0) console.log("F");             //  KHÔNG (0 là falsy)
+if (-1) console.log("G");            //  IN (-1 là truthy)
+if (" ") console.log("H");           //  IN (dấu cách là truthy - vì nó KHÔNG rỗng)
+
