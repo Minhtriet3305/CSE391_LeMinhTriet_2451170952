@@ -105,3 +105,28 @@ Lượt lặp 0: Tạo ra biến j_lượt_0 có giá trị 0. Hàm setTimeout �
 Lượt lặp 1: Tạo ra biến j_lượt_1 có giá trị 1. Hàm setTimeout thứ hai "bắt giữ" biến j_lượt_1.
 Lượt lặp 2: Tạo ra biến j_lượt_2 có giá trị 2. Hàm setTimeout thứ ba "bắt giữ" biến j_lượt_2.
 Khi setTimeout kích hoạt (sau 200ms): Mỗi hàm callback sẽ in ra giá trị của biến j riêng biệt mà nó đã "chụp lại" tại thời điểm vòng lặp diễn ra. Kết quả thu được là let: 0, let: 1, let: 2.
+
+CÂU A3:
+    // 1. Lấy các số chẵn (Dùng filter để lọc)
+    const evens = nums.filter(n => n % 2 === 0);
+
+    // 2. Nhân mỗi số với 3 (Dùng map để biến đổi)
+    const tripled = nums.map(n => n * 3);
+
+    // 3. Tính tổng tất cả (Dùng reduce để tích lũy, số 0 cuối cùng là giá trị khởi tạo)
+    const total = nums.reduce((sum, n) => sum + n, 0);
+
+    // 4. Tìm số đầu tiên > 7 (Dùng find, tìm thấy phát dừng luôn)
+    const firstGreaterThan7 = nums.find(n => n > 7);
+
+    // 5. Kiểm tra CÓ số nào > 10 không (Dùng some, chỉ cần 1 ông thỏa mãn là true, ở đây không có ai nên false)
+    const hasGreaterThan10 = nums.some(n => n > 10);
+
+    // 6. Kiểm tra TẤT CẢ đều > 0 (Dùng every, bắt buộc tất cả phải thỏa mãn)
+    const allPositive = nums.every(n => n > 0);
+
+    // 7. Tạo mảng "Số X là [chẵn/lẻ]" (Dùng map kết hợp Template Literals và toán tử 3 ngôi)
+    const descriptions = nums.map(n => `Số ${n} là ${n % 2 === 0 ? 'chẵn' : 'lẻ'}`);
+
+    // 8. Đảo ngược mảng không mutate gốc (Dùng toán tử spread [...] để clone ra mảng mới rồi mới .reverse())
+    const reversed = [...nums].reverse();
