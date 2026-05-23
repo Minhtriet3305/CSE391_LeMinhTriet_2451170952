@@ -85,20 +85,32 @@
         `
         console.log(announcement);
 
-        //
+        // BÀI 05
         const PI = 3.14159;
         let banKinh = 5;
 
         console.log("Diện tích: ", PI * (banKinh * banKinh));
         console.log("Chu vi: ", 2 * PI * banKinh);
 
-        //
+        //BÀI 06
 
         let diem = 7.5;
         let diemChuyenCan = 9;
 
         console.log(`${diem >= 5 && diemChuyenCan >= 8 ? "Đạt" : "Không đạt"}`);
         console.log(`${diem >= 8.5 ? "Giỏi" : diem >= 7 ? "Khá" : diem >= 5 ? "Trung bình" : "Yếu"}`);
+
+        //BÀI 07
+        const array = ["fish","egg","broccoli","chicken wing","soup"];
+        console.log("Món đầu tiên: ",array[0]);
+        console.log("Món cuối cùng: ",array[array.length - 1]);
+        array.push("Bã mía xé sợi");
+        array.pop();
+        array.forEach((mon,index) => {
+            console.log(`món ${index + 1} : ${mon}`);
+        })
+        console.log(array.includes("Pho"));
+        
 
     </script>
 </body>
