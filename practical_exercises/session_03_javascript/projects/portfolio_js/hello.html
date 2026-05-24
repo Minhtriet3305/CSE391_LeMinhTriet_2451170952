@@ -129,7 +129,28 @@
         console.log("Địa chỉ: ",sinhVien.diaChi);
 
         sinhVien.email = "NVMinh@gmail.com";
-        
+
+        //BÀI 09
+        function maxHaiSo(a,b){
+            return(a > b ? a : b);
+        }
+
+        function namNhuan(nam){
+            if(nam % 4 == 0 && nam % 100 != 0 || nam % 400 == 0){
+                console.log("Đây là năm nhuận");
+            }
+            else{
+                console.log("Đây không phải là năm nhuận");
+            }
+        }
+
+        function gioiThieu(hoTen, tuoi, nganh){
+            return`Tên tôi là ${hoTen}, ${tuoi} tuổi, học ngành ${nganh}`;
+        }
+
+        function tinhGiaBan(giaGoc,giaGiam = 0){
+            return (giaGoc * (1 - giaGiam)/100);
+        }
 
     </script>
 </body>
