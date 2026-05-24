@@ -8,149 +8,169 @@
 </head>
 
 <body>
-    <h1>Bài tập đầu tiên với JavaScript</h1>
-    <p>Mở Console (F12 → Console) để xem kết quả</p>
+    <h1 id="title">Xin chào DOM!</h1>
+    <p class="description">Đây là đoạn văn đầu tiên</p>
+    <p class="description">Đây là đoạn văn thứ hai</p>
+    <ul id="danh-sach">
+        <li class="item">HTML</li>
+        <li class="item">CSS</li>
+        <li class="item">JavaScript</li>
+    </ul>
 
     <script>
-        console.log("Xin chào thế giới!");
-        console.log("Tôi đang học JavaScript");
-        console.log(2026);
+        // console.log("Xin chào thế giới!");
+        // console.log("Tôi đang học JavaScript");
+        // console.log(2026);
 
-        //let
-        let name = "Minh Triet";
-        let age = 21;
-        let major = "Software engineering";
+        // //let
+        // let name = "Minh Triet";
+        // let age = 21;
+        // let major = "Software engineering";
 
-        console.log("Name: ", name);
-        console.log("Age: ", age);
-        console.log("Major: ", major);
+        // console.log("Name: ", name);
+        // console.log("Age: ", age);
+        // console.log("Major: ", major);
 
-        name = "Le Minh Triet";
-        console.log("Name: ", name);
+        // name = "Le Minh Triet";
+        // console.log("Name: ", name);
 
-        //const
-        const hoTen = "Le Minh Triet";
-        console.log("Ho ten: ", hoTen);
+        // //const
+        // const hoTen = "Le Minh Triet";
+        // console.log("Ho ten: ", hoTen);
 
-        //var
-        var monHoc = "CSE391";
-        console.log("Môn:", monHoc);
+        // //var
+        // var monHoc = "CSE391";
+        // console.log("Môn:", monHoc);
 
-        //DATA TYPE
-        //string
-        let hoTen1 = "Nguyễn Văn A";
-        let diaChi = 'Hà Nội';
-        let loiChao = `Xin chào ${hoTen}`;
+        // //DATA TYPE
+        // //string
+        // let hoTen1 = "Nguyễn Văn A";
+        // let diaChi = 'Hà Nội';
+        // let loiChao = `Xin chào ${hoTen}`;
 
-        console.log(typeof hoTen1);
-        console.log(loiChao);
+        // console.log(typeof hoTen1);
+        // console.log(loiChao);
 
-        //number
-        let soNguyen = 42;
-        let soThuc = 3.14;
-        let am = -10;
-        let voCuc = Infinity;
+        // //number
+        // let soNguyen = 42;
+        // let soThuc = 3.14;
+        // let am = -10;
+        // let voCuc = Infinity;
 
-        console.log(typeof soNguyen);
+        // console.log(typeof soNguyen);
 
-        //boolean
-        let laTrue = true;
-        let laFalse = false;
+        // //boolean
+        // let laTrue = true;
+        // let laFalse = false;
 
-        console.log(typeof laTrue);
+        // console.log(typeof laTrue);
 
-        //null & undefined
-        let giaTriNull = null;          // "không có gì" (cố tình)
-        let chuaGanGiaTri;              // undefined (chưa gán)
+        // //null & undefined
+        // let giaTriNull = null;          // "không có gì" (cố tình)
+        // let chuaGanGiaTri;              // undefined (chưa gán)
 
-        console.log(typeof giaTriNull);   // "object" (bug nổi tiếng của JS!)
-        console.log(typeof chuaGanGiaTri); // "undefined"
+        // console.log(typeof giaTriNull);   // "object" (bug nổi tiếng của JS!)
+        // console.log(typeof chuaGanGiaTri); // "undefined"
 
-        //check data types
-        console.log("42 là:", typeof 42);          // number
-        console.log("'42' là:", typeof "42");      // string
-        console.log("true là:", typeof true);      // boolean
+        // //check data types
+        // console.log("42 là:", typeof 42);          // number
+        // console.log("'42' là:", typeof "42");      // string
+        // console.log("true là:", typeof true);      // boolean
 
-        //Template Literal
-        let sanPham = "Laptop";
-        let soLuong = 2;
-        let donGia = 15000000;
+        // //Template Literal
+        // let sanPham = "Laptop";
+        // let soLuong = 2;
+        // let donGia = 15000000;
 
-        let announcement = `
-        =========HÓA ĐƠN=========
-        Tên sản phẩm: ${sanPham}
-        Số lượng: ${soLuong}
-        Đơn giá: ${donGia}
-        Tổng tiền: ${soLuong * donGia}
-        `
-        console.log(announcement);
+        // let announcement = `
+        // =========HÓA ĐƠN=========
+        // Tên sản phẩm: ${sanPham}
+        // Số lượng: ${soLuong}
+        // Đơn giá: ${donGia}
+        // Tổng tiền: ${soLuong * donGia}
+        // `
+        // console.log(announcement);
 
-        // BÀI 05
-        const PI = 3.14159;
-        let banKinh = 5;
+        // // BÀI 05
+        // const PI = 3.14159;
+        // let banKinh = 5;
 
-        console.log("Diện tích: ", PI * (banKinh * banKinh));
-        console.log("Chu vi: ", 2 * PI * banKinh);
+        // console.log("Diện tích: ", PI * (banKinh * banKinh));
+        // console.log("Chu vi: ", 2 * PI * banKinh);
 
-        //BÀI 06
+        // //BÀI 06
 
-        let diem = 7.5;
-        let diemChuyenCan = 9;
+        // let diem = 7.5;
+        // let diemChuyenCan = 9;
 
-        console.log(`${diem >= 5 && diemChuyenCan >= 8 ? "Đạt" : "Không đạt"}`);
-        console.log(`${diem >= 8.5 ? "Giỏi" : diem >= 7 ? "Khá" : diem >= 5 ? "Trung bình" : "Yếu"}`);
+        // console.log(`${diem >= 5 && diemChuyenCan >= 8 ? "Đạt" : "Không đạt"}`);
+        // console.log(`${diem >= 8.5 ? "Giỏi" : diem >= 7 ? "Khá" : diem >= 5 ? "Trung bình" : "Yếu"}`);
 
-        //BÀI 07
-        const array = ["fish", "egg", "broccoli", "chicken wing", "soup"];
-        console.log("Món đầu tiên: ", array[0]);
-        console.log("Món cuối cùng: ", array[array.length - 1]);
-        array.push("Bã mía xé sợi");
-        array.pop();
-        array.forEach((mon, index) => {
-            console.log(`món ${index + 1} : ${mon}`);
-        })
-        console.log(array.includes("Pho"));
+        // //BÀI 07
+        // const array = ["fish", "egg", "broccoli", "chicken wing", "soup"];
+        // console.log("Món đầu tiên: ", array[0]);
+        // console.log("Món cuối cùng: ", array[array.length - 1]);
+        // array.push("Bã mía xé sợi");
+        // array.pop();
+        // array.forEach((mon, index) => {
+        //     console.log(`món ${index + 1} : ${mon}`);
+        // })
+        // console.log(array.includes("Pho"));
 
-        //BÀI 08
-        let sinhVien = {
-            hoTen: "Nguyễn Văn Minh",
-            tuoi: 20,
-            nganh: "Kỹ thuật phần mềm",
-            soThich: ["Chơi game","Đọc sách","Chụp ảnh"],
-            diaChi:{
-                thanhPho:"Hà Nội",
-                quan:"Hà Đông",
-                duong:"Nguyễn Thanh Bình"
-            }
-        };
+        // //BÀI 08
+        // let sinhVien = {
+        //     hoTen: "Nguyễn Văn Minh",
+        //     tuoi: 20,
+        //     nganh: "Kỹ thuật phần mềm",
+        //     soThich: ["Chơi game","Đọc sách","Chụp ảnh"],
+        //     diaChi:{
+        //         thanhPho:"Hà Nội",
+        //         quan:"Hà Đông",
+        //         duong:"Nguyễn Thanh Bình"
+        //     }
+        // };
 
-        console.log("Tôi là: ",sinhVien.hoTen," ",sinhVien.tuoi, "tuổi"," ","học ngành",sinhVien.nganh);
-        console.log("Sở thích:",sinhVien.soThich[0]);
-        console.log("Địa chỉ: ",sinhVien.diaChi);
+        // console.log("Tôi là: ",sinhVien.hoTen," ",sinhVien.tuoi, "tuổi"," ","học ngành",sinhVien.nganh);
+        // console.log("Sở thích:",sinhVien.soThich[0]);
+        // console.log("Địa chỉ: ",sinhVien.diaChi);
 
-        sinhVien.email = "NVMinh@gmail.com";
+        // sinhVien.email = "NVMinh@gmail.com";
 
-        //BÀI 09
-        function maxHaiSo(a,b){
-            return(a > b ? a : b);
-        }
+        // //BÀI 09
+        // function maxHaiSo(a,b){
+        //     return(a > b ? a : b);
+        // }
 
-        function namNhuan(nam){
-            if(nam % 4 == 0 && nam % 100 != 0 || nam % 400 == 0){
-                console.log("Đây là năm nhuận");
-            }
-            else{
-                console.log("Đây không phải là năm nhuận");
-            }
-        }
+        // function namNhuan(nam){
+        //     if(nam % 4 == 0 && nam % 100 != 0 || nam % 400 == 0){
+        //         console.log("Đây là năm nhuận");
+        //     }
+        //     else{
+        //         console.log("Đây không phải là năm nhuận");
+        //     }
+        // }
 
-        function gioiThieu(hoTen, tuoi, nganh){
-            return`Tên tôi là ${hoTen}, ${tuoi} tuổi, học ngành ${nganh}`;
-        }
+        // function gioiThieu(hoTen, tuoi, nganh){
+        //     return`Tên tôi là ${hoTen}, ${tuoi} tuổi, học ngành ${nganh}`;
+        // }
 
-        function tinhGiaBan(giaGoc,giaGiam = 0){
-            return (giaGoc * (1 - giaGiam)/100);
-        }
+        // function tinhGiaBan(giaGoc,giaGiam = 0){
+        //     return (giaGoc * (1 - giaGiam)/100);
+        // }
+
+        //Bài 0B.2
+        const title = document.getElementById("title");
+        console.log("getElementById: ",title);
+
+        const firstParagraph = document.querySelector('.description');
+        console.log("get first p: ",firstParagraph.textContent);
+
+        const all_li = document.querySelectorAll('li');
+        console.log("all li: ",all_li);
+        
+        all_li.forEach((item,index) => {
+            console.log(`Item ${index}: ${item.textContent} `);
+        });
 
     </script>
 </body>
