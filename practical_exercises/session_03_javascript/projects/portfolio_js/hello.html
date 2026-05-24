@@ -101,15 +101,34 @@
         console.log(`${diem >= 8.5 ? "Giỏi" : diem >= 7 ? "Khá" : diem >= 5 ? "Trung bình" : "Yếu"}`);
 
         //BÀI 07
-        const array = ["fish","egg","broccoli","chicken wing","soup"];
-        console.log("Món đầu tiên: ",array[0]);
-        console.log("Món cuối cùng: ",array[array.length - 1]);
+        const array = ["fish", "egg", "broccoli", "chicken wing", "soup"];
+        console.log("Món đầu tiên: ", array[0]);
+        console.log("Món cuối cùng: ", array[array.length - 1]);
         array.push("Bã mía xé sợi");
         array.pop();
-        array.forEach((mon,index) => {
+        array.forEach((mon, index) => {
             console.log(`món ${index + 1} : ${mon}`);
         })
         console.log(array.includes("Pho"));
+
+        //BÀI 08
+        let sinhVien = {
+            hoTen: "Nguyễn Văn Minh",
+            tuoi: 20,
+            nganh: "Kỹ thuật phần mềm",
+            soThich: ["Chơi game","Đọc sách","Chụp ảnh"],
+            diaChi:{
+                thanhPho:"Hà Nội",
+                quan:"Hà Đông",
+                duong:"Nguyễn Thanh Bình"
+            }
+        };
+
+        console.log("Tôi là: ",sinhVien.hoTen," ",sinhVien.tuoi, "tuổi"," ","học ngành",sinhVien.nganh);
+        console.log("Sở thích:",sinhVien.soThich[0]);
+        console.log("Địa chỉ: ",sinhVien.diaChi);
+
+        sinhVien.email = "NVMinh@gmail.com";
         
 
     </script>
