@@ -36,7 +36,7 @@
         //Bài 0B.3
         const title1 = document.getElementById('title');
         title1.textContent = "Minh_Triet";
-        
+
 
         const class1 = document.querySelector('.description');
         class1.textContent = "Tôi đang học DOM";
@@ -53,6 +53,7 @@
         document.getElementsByTagName('li').forEach(li => {
             li.setAttribute('class', 'highlight');
         });
+        
 
         document.querySelectorAll('li').forEach((li, index) => {
             li.setAttribute('data-index', index);
