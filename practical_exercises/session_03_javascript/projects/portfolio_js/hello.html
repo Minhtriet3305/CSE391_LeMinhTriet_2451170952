@@ -172,6 +172,84 @@
             console.log(`Item ${index}: ${item.textContent} `);
         });
 
+        //Bài 0B.3
+        const title1 = document.getElementById('title');
+        title1.textContent = "Minh_Triet";
+
+        const class1 = document.querySelector('.description');
+        class1.textContent = "Tôi đang học DOM";
+
+        const p1 = document.querySelector('.item');
+        p1.textContent = "<strong>HTML5</strong>";
+        p1.innerHTML = "<strong>HTML5</strong>";
+
+        document.querySelectorAll('.item').forEach(li => {
+            li.textContent = li.textContent + "(Đã học)";
+        })
+
+        //BÀI 0B.4
+        document.getElementsByTagName('li').forEach(li => {
+            li.setAttribute('class','highlight');
+        });
+
+        document.querySelectorAll('li').forEach((li, index) =>{
+            li.setAttribute('data-index',index);
+        })
+
+        document.title = "DOM practice";
+
+        //BÀI 0B.5
+        document.querySelectorAll('li').forEach(li => {
+            li.classList.add('highlight');
+        });
+
+        console.log(document.querySelectorAll('li').classList.contain('highlight'));
+
+        document.querySelectorAll('li')[1].classList.toggle('text-red');
+
+        document.querySelectorAll('li').forEach(li => {
+            li.classList.remove('highlight');
+        })
+
+        //BÀI 0B.6
+
+        document.querySelectorAll('li').forEach((li,index) => {
+            if(index % 2 == 0){
+                li.style.backgroundColor = '#dbeafe';
+            }
+            else{
+                li.style.backgroundColor = '#fce7f3';
+            }
+        });
+
+        document.querySelectorAll('li').forEach((li,index) => {
+            li.style.fontSize = (index + 1) * 14 + 'px';
+        });
+
+        //BÀI 0B.7
+
+       const newLi = document.createElement('li');
+       newLi.textContent = 'tenMon';
+       newLi.classList.add('item');
+
+       const danhSach = document.getElementById('danh-sach');
+
+       danhSach.appendChild(newLi);
+
+       function themMonHoc(tenMon){
+        const newMonHoc = document.createElement('li');
+        newMonHoc.textContent = tenMon;
+        newMonHoc.classList.add('item');
+
+        const danhSach = document.querySelector('danh-sach');
+
+        danhSach.appendChild(newMonHoc);
+
+       }
+    
+        
+
+
     </script>
 </body>
 
