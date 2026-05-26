@@ -53,7 +53,7 @@
         document.getElementsByTagName('li').forEach(li => {
             li.setAttribute('class', 'highlight');
         });
-        
+
 
         document.querySelectorAll('li').forEach((li, index) => {
             li.setAttribute('data-index', index);
@@ -66,6 +66,7 @@
             li.classList.add('highlight');
         });
 
+        
         console.log(document.querySelectorAll('li').classList.contain('highlight'));
 
         document.querySelectorAll('li')[1].classList.toggle('text-red');
