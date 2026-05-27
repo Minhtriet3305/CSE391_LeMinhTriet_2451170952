@@ -13,8 +13,8 @@ function Product() {
                 <button>Mua ngay</button>
             </div>
         </>
+        
     )
-    
 }
 
 export default Product

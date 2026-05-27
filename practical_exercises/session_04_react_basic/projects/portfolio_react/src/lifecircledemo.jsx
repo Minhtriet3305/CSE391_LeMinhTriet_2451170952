@@ -8,6 +8,7 @@ function LifecycleDemo() {
             <p>Component này chỉ render MỘT lần</p>
         </div>
     );
+    
 }
 
 export default LifecycleDemo;
