@@ -28,6 +28,7 @@ export default BadCounter;
 
 
 function GoodCounter() {
+    
     const [count, setCount] = useState(0);  // ← useState!
 
     function handleClick() {
