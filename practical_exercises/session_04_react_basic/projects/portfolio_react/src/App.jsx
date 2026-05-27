@@ -6,6 +6,8 @@ import './App.css'
 import User from './userprofile.jsx'
 import Product from './productinfo.jsx'
 import LifecycleDemo from './lifecircledemo.jsx'
+import BadCounter from './bad_and_good_counter.jsx'
+import GoodCounter from './bad_and_good_counter.jsx'
 
 
 function GoodCounter() {
