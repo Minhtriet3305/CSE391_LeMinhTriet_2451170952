@@ -24,6 +24,7 @@ function GoodCounter() {
         ✅ Nhấn nút → Số trên màn hình CẬP NHẬT!
       </p>
     </div>
+    
   );
 }
 
