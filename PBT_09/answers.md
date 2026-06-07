@@ -115,3 +115,26 @@ document.querySelector("#result").innerHTML = safeHTML;
 // <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 const cleanHTML = DOMPurify.sanitize(userInput);
 document.querySelector("#result").innerHTML = cleanHTML;
+
+CÂU A3:
+Không có stopPropagation():
+    Khi click vào button, event bubble up (nổi lên) từ button → inner → outer
+
+    Output:
+        BUTTON
+        INNER
+        OUTER
+
+    Giải thích: Event bubbling là quá trình sự kiện được trigger từ element con lên đến các element cha. Thứ tự là:
+
+    Event xảy ra trên #btn → In "BUTTON"
+    Event bubble up đến #inner → In "INNER"
+    Event tiếp tục bubble up đến #outer → In "OUTER"
+    
+Có stopPropagation():
+    Khi uncomment e.stopPropagation() trong event handler của button:
+
+    Output:
+        BUTTON
+
+    Giải thích: stopPropagation() dừng sự lan truyền (bubbling) của event. Chỉ element được click là thực thi handler, event không bubble lên cha.
