@@ -1,0 +1,202 @@
+:root {
+    --bg-app: #e0f2fe;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --primary: #0284c7;
+    --primary-hover: #0369a1;
+    --error: #ef4444;
+    --border: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #bae6fd, #e0f2fe);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.weather-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+#cityInput {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#cityInput:focus {
+    border-color: var(--primary);
+}
+
+.search-form button {
+    padding: 0 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-form button:hover {
+    background: var(--primary-hover);
+}
+
+/* History Tags */
+.history-container {
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+}
+.history-container p {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+.history-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.history-btn {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    color: var(--text-main);
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+.history-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* --- 3 STATES CSS --- */
+
+/* 1. Loading State & Spinner Animation */
+.state-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 30px 0;
+    color: var(--text-muted);
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 2. Error State */
+.state-error {
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: var(--error);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* 3. Success State (Weather Info Visual) */
+.state-success {
+    text-align: center;
+    padding-top: 10px;
+}
+.weather-location {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.weather-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+.weather-icon {
+    font-size: 3.5rem;
+}
+.weather-temp {
+    font-size: 3rem;
+    font-weight: 800;
+}
+.weather-desc {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: #f8fafc;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-muted);
+}
+.detail-item span:last-child {
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-top: 2px;
+}
+
+.state-initial {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 30px 0;
+    font-style: italic;
+}
