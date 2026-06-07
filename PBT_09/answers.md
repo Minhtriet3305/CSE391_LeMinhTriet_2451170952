@@ -149,7 +149,7 @@ document.querySelector("#decrementBtn").addEventListener("onclick", function() {
 
 // ✅ ĐÚNG
 document.querySelector("#decrementBtn").addEventListener("click", function() {
-    
+
 Giải thích: Tham số thứ nhất của addEventListener phải là tên event ("click"), không phải tên property ("onclick").
 
 LỖI 2: Dòng 231 - countDisplay = count (gán sai)
@@ -243,3 +243,55 @@ if (incrementBtn) {
         countDisplay.textContent = count;
     });
 }
+
+CÂU C2:
+1. Tại sao bind event lên 1000 elements riêng lẻ là BAD PRACTICE? Event Delegation giải quyết thế nào?
+
+Việc sử dụng vòng lặp để gắn addEventListener cho 1000 phần tử riêng biệt được coi là một "tối kỵ" (Bad Practice) trong lập trình Front-end vì hai lý do lớn sau:
+
++ Tốn tài nguyên bộ nhớ (Memory Consumption)
+Mỗi lần bạn gọi addEventListener, trình duyệt phải khởi tạo và cấp phát một vùng nhớ để lưu trữ Event Listener Object.
+
+Gắn cho 1000 phần tử đồng nghĩa với việc tạo ra 1000 object độc lập nằm chễm chệ trong RAM.
+
+Nếu ứng dụng có nhiều trang hoặc các phần tử này bị xóa/thêm liên tục mà không được gỡ event (removeEventListener) đúng cách, nó sẽ dẫn đến hiện tượng Memory Leak (rò rỉ bộ nhớ), khiến ứng dụng bị chậm, giật lag theo thời gian.
+
++ Quản lý kém và không linh hoạt (Maintainability)
+Giả sử sau khi render 1000 phần tử, bạn có tính năng "Tải thêm 500 item nữa". Bạn lại phải viết thêm một vòng lặp nữa để bind event cho 500 item mới này. Ngược lại, nếu một item bị xóa đi, các event gắn với nó vẫn có thể lơ lửng trong bộ nhớ nếu không được dọn dẹp kỹ.
+
+- Event Delegation giải quyết bài toán này thế nào?
+Event Delegation (Ủy quyền sự kiện) giải quyết triệt để vấn đề trên bằng cách tận dụng cơ chế Event Bubbling (Sự kiện nổi bọt) của JavaScript. Thay vì gắn 1000 listener cho 1000 con, chúng ta chỉ gắn duy nhất 1 listener lên phần tử CHA bao bọc chúng.
+
+Khi bạn click vào một phần tử con, sự kiện click đó không dừng lại mà sẽ "nổi bọt" lên các tầng cha của nó. Tại phần tử cha, chúng ta chỉ cần dùng thuộc tính e.target để kiểm tra chính xác phần tử con nào vừa được click.    
+
+2. 
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement("div");
+    div.textContent = `Item ${i}`;
+    document.body.appendChild(div);   // ← 1000 lần reflow!
+}
+
+Đoạn code cũ: Mỗi lần chạy qua dòng document.body.appendChild(div);, trình duyệt phải chọc trực tiếp vào cây DOM thật (Real DOM). Hành động này bắt trình duyệt phải tính toán lại kích thước, vị trí và vẽ lại giao diện (gọi là Reflow và Repaint). Lặp lại việc này 1000 lần trong một vòng lặp cực kỳ tốn tài nguyên và gây nghẽn hiệu năng (gây sụt giảm FPS).
+
+Code đã được tối ưu (Refactor):
+JavaScript
+// 1. Tạo một DocumentFragment (DOM ảo/DOM tạm thời trong bộ nhớ)
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement("div");
+    div.textContent = `Item ${i}`;
+    
+    // 2. Gắn div vào fragment (Chỉ thao tác trên bộ nhớ nền, KHÔNG gây Reflow)
+    fragment.appendChild(div); 
+}
+
+// 3. Đổ toàn bộ fragment vào DOM thật ĐÚNG 1 LẦN DUY NHẤT
+document.body.appendChild(fragment); // ← Chỉ gây ra đúng 1 lần Reflow!
+Tại sao sử dụng DocumentFragment lại nhanh hơn?
+Hãy tưởng tượng bạn cần chuyển 1000 viên gạch từ ngoài sân vào trong nhà:
+
+Cách cũ (Gây 1000 lần Reflow): Bạn cầm từng viên gạch một, đi vào nhà đặt xuống, rồi lại đi ra lấy viên tiếp theo. Bạn phải đi qua đi lại đúng 1000 chuyến. Trình duyệt cũng vậy, nó phải tính toán lại giao diện 1000 lần.
+
+Cách mới (Dùng DocumentFragment): Bạn xếp sẵn 1000 viên gạch lên một chiếc xe đẩy (đây chính là DocumentFragment). Khi xếp gạch lên xe, bạn vẫn ở ngoài sân (bộ nhớ tạm), cấu trúc ngôi nhà chưa hề bị xáo trộn. Sau khi xếp xong, bạn chỉ cần đẩy xe vào nhà đúng 1 lần duy nhất.
+
