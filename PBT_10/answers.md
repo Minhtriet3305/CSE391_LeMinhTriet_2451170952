@@ -375,3 +375,129 @@ try {
 +----------------------+-----------------------------------------------------------------------------------------+
 
 
+CÂU C2:
++---------------------+-------------------------------+-------------------------------+-------------------------------------------------------+
+|       METHOD        |        KHI NÀO RESOLVE?       |        KHI NÀO REJECT?        |                   USE CASE THỰC TẾ                    |
++---------------------+-------------------------------+-------------------------------+-------------------------------------------------------+
+|  Promise.all()      | TẤT CẢ các promise bên trong  | Ngay khi có ÍT NHẤT 1 promise | Tác vụ mang tính "đồng lòng": tất cả thao tác bắt buộc|
+|                     | đều phải thành công (resolve).| bị thất bại (reject).         | phải thành công (vd: tải đủ thông tin trang cá nhân). |
++---------------------+-------------------------------+-------------------------------+-------------------------------------------------------+
+|  Promise.allSettled() Khi TẤT CẢ các promise đều đã  | KHÔNG BAO GIỜ REJECT          | Thu thập dữ liệu toàn diện: cần kết quả của tất cả,   |
+|                     | xong xuôi (bất kể là thành công| (Luôn trả về mảng kết quả     | lỗi của bên này không được kéo sập bên khác (vd:      |
+|                     | hay thất bại).                | chi tiết dạng trạng thái).    | hệ thống trang quản trị Dashboard đa thành phần).     |
++---------------------+-------------------------------+-------------------------------+-------------------------------------------------------+
+|  Promise.race()     | Khi có promise ĐẦU TIÊN về đích| Khi promise ĐẦU TIÊN về đích  | Cuộc đua tốc độ tuyệt đối: lấy kết quả của thằng nhanh|
+|                     | và thằng đó THÀNH CÔNG.       | và thằng đó bị THẤT BẠI.      | nhất, hoặc làm cơ chế Tự động Ngắt/Timeout nếu API    |
+|                     |                               |                               | phản hồi quá lâu (Race giữa API và một hàm Delay).    |
++---------------------+-------------------------------+-------------------------------+-------------------------------------------------------+
+|  Promise.any()      | Khi có promise ĐẦU TIÊN về đích| Chỉ khi TẤT CẢ các promise    | Tìm phương án khả thi đầu tiên: chỉ cần ít nhất một   |
+|                     | và thằng đó THÀNH CÔNG.       | bên trong đều bị THẤT BẠI.    | server/nguồn tải thành công là được (vd: thử kết nối  |
+|                     |                               |                               | tới 3 server dự phòng CDN khác nhau).                 |
++---------------------+-------------------------------+-------------------------------+-------------------------------------------------------+
+
+Ví dụ code:
+1. Promise.all() — Tất cả thao tác phải thành công
+
+// E-Commerce: Load sản phẩm, giỏ hàng, user info
+// Nếu 1 trong 3 fail → toàn bộ fail
+
+async function loadCheckoutPage() {
+    try {
+        const [products, cart, user] = await Promise.all([
+            fetch('/api/products').then(r => r.json()),
+            fetch('/api/cart').then(r => r.json()),
+            fetch('/api/user').then(r => r.json())
+        ]);
+        
+        renderCheckout(products, cart, user);
+    } catch (error) {
+        // Nếu API nào lỗi → catch error
+        showError('Không thể tải trang checkout');
+    }
+}
+
+2. Promise.allSettled() — Cần kết quả từ tất cả
+
+// Dashboard: Lấy dữ liệu từ 3 APIs, nhưng 1 API lỗi không ảnh hưởng các cái khác
+
+async function loadDashboard() {
+    const results = await Promise.allSettled([
+        fetch('/api/sales').then(r => r.json()),      // API 1
+        fetch('/api/users').then(r => r.json()),      // API 2
+        fetch('/api/reports').then(r => r.json())     // API 3
+    ]);
+    
+    // [
+    //   { status: 'fulfilled', value: [...] },     ✅
+    //   { status: 'rejected', reason: Error(...) },  ❌
+    //   { status: 'fulfilled', value: [...] }       ✅
+    // ]
+    
+    results.forEach((result, index) => {
+        if (result.status === 'fulfilled') {
+            renderWidget(index, result.value);
+        } else {
+            renderWidgetError(index, result.reason);
+        }
+    });
+}
+
+3. Promise.race() — Lấy kết quả đầu tiên (Timeout, Fast First)
+
+// Scenario A: Fetch từ 2 CDNs, lấy cái nhanh nhất
+async function fetchFast() {
+    const data = await Promise.race([
+        fetch('https://cdn1.example.com/data').then(r => r.json()),
+        fetch('https://cdn2.example.com/data').then(r => r.json())
+    ]);
+    return data; // Trả về từ CDN nhanh hơn
+}
+
+// Scenario B: Fetch với timeout
+async function fetchWithTimeout(url, timeoutMs) {
+    return Promise.race([
+        fetch(url).then(r => r.json()),
+        new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Timeout')), timeoutMs)
+        )
+    ]);
+}
+
+// Sử dụng:
+try {
+    const data = await fetchWithTimeout('/api/data', 5000);
+} catch (error) {
+    if (error.message === 'Timeout') {
+        console.log('API quá chậm');
+    }
+}
+
+4. Promise.any() — Ít nhất 1 phải thành công
+
+// Email notification: Gửi qua 3 providers, chỉ cần 1 thành công
+
+async function sendNotification(email, message) {
+    try {
+        const result = await Promise.any([
+            fetch('/api/sendgrid', { method: 'POST', body: email }),
+            fetch('/api/mailgun', { method: 'POST', body: email }),
+            fetch('/api/amazon-ses', { method: 'POST', body: email })
+        ]);
+        
+        console.log('Email sent via first successful provider');
+        return result;
+    } catch (error) {
+        // error = AggregateError: Tất cả providers đều fail
+        console.error('All email providers failed');
+    }
+}
+
+// Use case: Microservices retry — thử 3 instances, chỉ cần 1 respond
+async function callMicroservice() {
+    const instance = await Promise.any([
+        fetch('https://service-1.com/api'),
+        fetch('https://service-2.com/api'),
+        fetch('https://service-3.com/api')
+    ]);
+    return instance;
+}
