@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Product Catalog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">TechStore</div>
+        <div class="nav-actions">
+            <button id="darkModeToggle" class="btn-toggle">🌙 Dark Mode</button>
+            <div class="cart-icon-wrapper">
+                <span class="cart-icon">🛒</span>
+                <span id="cartBadge" class="cart-badge">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="controls-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+        </div>
+        
+        <div id="categoryFilters" class="category-filters">
+            </div>
+
+        <div class="sort-box">
+            <select id="sortSelect">
+                <option value="default">Sắp xếp theo</option>
+                <option value="price-asc">Giá: Thấp đến Cao</option>
+                <option value="price-desc">Giá: Cao đến Thấp</option>
+                <option value="name-asc">Tên: A - Z</option>
+                <option value="rating-desc">Đánh giá cao nhất</option>
+            </select>
+        </div>
+    </section>
+
+    <main class="catalog-container">
+        <div id="productGrid" class="product-grid"></div>
+    </main>
+
+    <div id="modalContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
