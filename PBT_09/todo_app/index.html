@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="todo-container">
+        <header>
+            <h1>Todos</h1>
+        </header>
+        
+        <main>
+            <form id="todoForm">
+                <input id="todoInput" type="text" placeholder="Bạn cần làm gì tiếp theo?" autocomplete="off" required>
+                <button type="submit">Thêm</button>
+            </form>
+
+            <ul id="todoList">
+                </ul>
+
+            <footer class="todo-footer" id="todoFooter">
+                <span id="todoCount" class="todo-count">0 items left</span>
+                
+                <nav class="filters" id="filters">
+                    <button data-filter="all" class="filter-btn active">All</button>
+                    <button data-filter="active" class="filter-btn">Active</button>
+                    <button data-filter="completed" class="filter-btn">Completed</button>
+                </nav>
+                
+                <button id="clearCompleted" class="clear-completed">Clear completed</button>
+            </footer>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
