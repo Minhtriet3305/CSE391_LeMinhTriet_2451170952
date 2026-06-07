@@ -130,7 +130,7 @@ Không có stopPropagation():
     Event xảy ra trên #btn → In "BUTTON"
     Event bubble up đến #inner → In "INNER"
     Event tiếp tục bubble up đến #outer → In "OUTER"
-    
+
 Có stopPropagation():
     Khi uncomment e.stopPropagation() trong event handler của button:
 
@@ -138,3 +138,108 @@ Có stopPropagation():
         BUTTON
 
     Giải thích: stopPropagation() dừng sự lan truyền (bubbling) của event. Chỉ element được click là thực thi handler, event không bubble lên cha.
+
+PHẦN C: DEBUG & PHÂN TÍCH
+CÂU C1:
+LỖI 1: Dòng 224 - addEventListener("onclick", ...)
+
+JavaScript
+// ❌ SAI
+document.querySelector("#decrementBtn").addEventListener("onclick", function() {
+
+// ✅ ĐÚNG
+document.querySelector("#decrementBtn").addEventListener("click", function() {
+    
+Giải thích: Tham số thứ nhất của addEventListener phải là tên event ("click"), không phải tên property ("onclick").
+
+LỖI 2: Dòng 231 - countDisplay = count (gán sai)
+
+JavaScript
+// ❌ SAI
+countDisplay = count;  // Gán biến countDisplay = 0 (mất reference đến element)
+
+// ✅ ĐÚNG
+countDisplay.textContent = count;  // Cập nhật nội dung hiển thị
+
+Giải thích: countDisplay là một reference đến DOM element. Nếu gán countDisplay = count, biến sẽ trỏ sang số 0, mất đi reference đến element.
+
+LỖI 3: Dòng 232 - innerHTML = null
+
+JavaScript
+// ❌ SAI (không sai về logic, nhưng không best practice)
+historyList.innerHTML = null;
+
+// ✅ ĐÚNG
+historyList.innerHTML = "";  // Hoặc
+historyList.textContent = "";
+
+Giải thích: Nên gán empty string "" thay vì null. Hoặc dùng while (historyList.firstChild) { historyList.removeChild(historyList.firstChild); } để xóa tất cả children.
+
+LỖI 4: Dòng 243 - item.remove (thiếu dấu ngoặc)
+
+JavaScript
+// ❌ SAI
+items.forEach(item => {
+    item.remove;  // Chỉ reference function, không gọi
+});
+
+// ✅ ĐÚNG
+items.forEach(item => {
+    item.remove();  // Phải có () để gọi function
+});
+
+Giải thích: item.remove là reference đến method, cần () để thực thi.
+
+LỖI 5: Dòng 255 - localStorage trả về string, không phải number
+
+JavaScript
+// ❌ SAI
+count = localStorage.getItem("count");  // Trả về string "5", không phải số 5
+countDisplay.textContent = count;  // Sẽ hiển thị "5" nhưng type là string
+
+// ✅ ĐÚNG
+count = parseInt(localStorage.getItem("count")) || 0;  // Convert thành number
+countDisplay.textContent = count;
+
+Giải thích: localStorage.getItem() luôn trả về string. Cần convert sang number để tính toán chính xác.
+
+LỖI 6: Dòng 256 - Cập nhật DOM khi load từ localStorage
+
+JavaScript
+// ❌ KHÔNG ĐẦY ĐỦ
+window.addEventListener("load", () => {
+    count = localStorage.getItem("count");
+    countDisplay.textContent = count;
+    // Nhưng history không được restore!
+});
+
+// ✅ ĐÚNG - Restore cả count và history
+window.addEventListener("load", () => {
+    const savedCount = localStorage.getItem("count");
+    const savedHistory = localStorage.getItem("history");
+    
+    if (savedCount) {
+        count = parseInt(savedCount);
+        countDisplay.textContent = count;
+    }
+    
+    if (savedHistory) {
+        historyList.innerHTML = savedHistory;
+    }
+});
+LỖI 7: Event binding trên null elements
+
+JavaScript
+// ❌ NẾU HTML thiếu các elements, addEventListener sẽ crash
+// Ví dụ: nếu không có #incrementBtn trong HTML
+document.querySelector("#incrementBtn").addEventListener("click", ...);
+// TypeError: Cannot read property 'addEventListener' of null
+
+// ✅ CÁCH SỬA: Kiểm tra element tồn tại trước
+const incrementBtn = document.querySelector("#incrementBtn");
+if (incrementBtn) {
+    incrementBtn.addEventListener("click", function() {
+        count++;
+        countDisplay.textContent = count;
+    });
+}
