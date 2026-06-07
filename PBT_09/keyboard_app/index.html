@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Navigation App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="shortcut-tip" aria-hidden="true">
+        Mẹo: Nhấn <kbd>Ctrl</kbd> + <kbd>K</kbd> để mở Command Palette | Nhấn <kbd>Tab</kbd> để di chuyển.
+    </div>
+
+    <main class="app-container">
+        <header>
+            <h1>Trình Duyệt Ảnh Thông Minh</h1>
+            <p>Sử dụng hoàn toàn bàn phím để trải nghiệm: Phím số <kbd>1</kbd>-<kbd>6</kbd>, mũi tên <kbd>←</kbd> <kbd>→</kbd>, và <kbd>Space</kbd></p>
+        </header>
+
+        <section class="gallery-viewer" aria-label="Trình xem ảnh chính">
+            <div class="viewer-relative">
+                <img id="mainImage" src="" alt="Đang tải ảnh..." aria-live="polite">
+                <div id="slideshowBadge" class="badge hidden" aria-live="assertive">AUTOPLAY ACTIVE</div>
+                <div id="imageIndex" class="image-index">1 / 6</div>
+            </div>
+            
+            <div class="gallery-controls">
+                <button id="prevBtn" class="control-btn" aria-label="Ảnh trước đó">◀ Trước</button>
+                <button id="playBtn" class="control-btn" aria-label="Bật hoặc tắt tự động chuyển ảnh">Thuyết minh (Space)</button>
+                <button id="nextBtn" class="control-btn" aria-label="Ảnh tiếp theo">Sau ▶</button>
+            </div>
+        </section>
+
+        <section class="thumbnail-section" aria-label="Danh sách ảnh thu nhỏ">
+            <div id="thumbnailGrid" class="thumbnail-grid">
+                </div>
+        </section>
+    </main>
+
+    <div id="commandOverlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="paletteTitle">
+        <div class="palette-box">
+            <div class="palette-header">
+                <span id="paletteTitle" class="sr-only">Hộp lệnh Command Palette</span>
+                <input type="text" id="paletteInput" placeholder="Gõ từ khóa lệnh... (Ví dụ: Dark, Play, Next)" aria-autocomplete="list" aria-controls="commandList">
+            </div>
+            <ul id="commandList" class="command-list" role="listbox" aria-label="Danh sách lệnh tìm thấy">
+                </ul>
+            <div class="palette-footer" aria-hidden="true">
+                Dùng <kbd>↑</kbd> <kbd>↓</kbd> để duyệt, <kbd>Enter</kbd> để chọn, <kbd>Esc</kbd> để đóng.
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
