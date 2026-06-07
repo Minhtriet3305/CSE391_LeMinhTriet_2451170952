@@ -199,3 +199,179 @@ async function fetchAll() {
 }
 
 fetchAll();
+
+PHẦN C: PHÂN TÍCH
+CÂU C1:
+1. Network Errors (mất mạng giữa chừng)
+JavaScript
+async function handleNetworkError(error) {
+    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        // Network error: Mất kết nối, DNS fail, CORS blocked
+        return {
+            type: 'NETWORK_ERROR',
+            message: 'Không có kết nối Internet. Vui lòng kiểm tra lại.',
+            retryable: true
+        };
+    }
+}
+Xử lý:
+
+Hiện thông báo "Mất kết nối Internet"
+Cung cấp nút "Thử lại"
+Lưu request để retry sau khi online
+Dùng navigator.onLine để detect online/offline
+JavaScript
+window.addEventListener('online', () => {
+    console.log('Connection restored. Retrying...');
+    retryFailedRequests();
+});
+
+window.addEventListener('offline', () => {
+    console.log('Connection lost');
+});
+2. API Errors (server trả 4xx/5xx)
+JavaScript
+async function handleAPIError(response) {
+    const statusHandlers = {
+        400: {
+            message: 'Yêu cầu không hợp lệ. Kiểm tra lại thông tin.',
+            retryable: false
+        },
+        401: {
+            message: 'Chưa xác thực. Vui lòng đăng nhập lại.',
+            action: 'REDIRECT_LOGIN',
+            retryable: false
+        },
+        403: {
+            message: 'Bạn không có quyền truy cập tài nguyên này.',
+            retryable: false
+        },
+        404: {
+            message: 'Không tìm thấy tài nguyên yêu cầu.',
+            retryable: false
+        },
+        429: {
+            message: 'Quá nhiều yêu cầu. Vui lòng chờ...',
+            retryable: true,
+            retryAfter: parseInt(response.headers.get('Retry-After')) * 1000
+        },
+        500: {
+            message: 'Lỗi máy chủ. Vui lòng thử lại sau.',
+            retryable: true
+        },
+        503: {
+            message: 'Dịch vụ đang bảo trì. Vui lòng quay lại sau.',
+            retryable: true
+        }
+    };
+    
+    return statusHandlers[response.status] || {
+        message: `Lỗi ${response.status}. Vui lòng thử lại.`,
+        retryable: true
+    };
+}
+3. Timeout (API chậm > 10 giây)
+JavaScript
+async function fetchWithTimeout(url, timeoutMs = 10000, options = {}) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        clearTimeout(timeoutId);
+        
+        if (error.name === 'AbortError') {
+            throw new Error(`Request timeout sau ${timeoutMs}ms`);
+        }
+        throw error;
+    }
+}
+
+// Sử dụng:
+try {
+    const data = await fetchWithTimeout('https://api.example.com/data', 10000);
+} catch (error) {
+    if (error.message.includes('timeout')) {
+        console.log('API quá chậm. Vui lòng thử lại.');
+    }
+}
+4. Retry Logic (thử lại 3 lần nếu lỗi network)
+JavaScript
+async function fetchWithRetry(url, maxRetries = 3, options = {}) {
+    let lastError;
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            console.log(`Attempt ${attempt}/${maxRetries}: ${url}`);
+            
+            const response = await fetchWithTimeout(url, 10000, options);
+            return response;
+        } catch (error) {
+            lastError = error;
+            
+            // Không retry nếu lỗi 4xx (trừ 429)
+            if (error.message.includes('HTTP 4') && !error.message.includes('429')) {
+                throw error;
+            }
+            
+            // Không retry nếu là lần cuối
+            if (attempt === maxRetries) break;
+            
+            // Exponential backoff: 1s → 2s → 4s
+            const delay = 1000 * Math.pow(2, attempt - 1);
+            console.log(`Retrying after ${delay}ms...`);
+            await new Promise(resolve => setTimeout(resolve, delay));
+        }
+    }
+    
+    throw lastError;
+}
+
+// Sử dụng:
+try {
+    const data = await fetchWithRetry('/api/products', 3);
+} catch (error) {
+    console.error('Failed after 3 retries:', error.message);
+    showErrorNotification(error.message);
+}
+
++----------------------+-----------------------------------------------------------------------------------------+
+|      MÃ / LOẠI LỖI   |                       CHIẾN LƯỢC XỬ LÝ TRÊN CLIENT (UI/UX & LOGIC)                      |
++----------------------+-----------------------------------------------------------------------------------------+
+| Network Error        |  • Hiện thông báo mất kết nối trực quan.                                                |
+|                      |  • Hiển thị nút [Thử lại] (Manual Retry).                                               |
+|                      |  • Tích hợp Event Listener: Tự động Auto-Retry ngay khi thiết bị có mạng trở lại (Online)|
++----------------------+-----------------------------------------------------------------------------------------+
+| 400 Bad Request      |  • NGHIÊM CẤM RETRY tự động (vì gửi lại data lỗi vẫn sẽ ra lỗi).                        |
+|                      |  • Parse dữ liệu từ Server để hiển thị thông báo lỗi Validation tương ứng lên form.     |
++----------------------+-----------------------------------------------------------------------------------------+
+| 401 Unauthorized     |  • Chạy hàm Refresh Token ngầm (gửi Refresh Token để lấy Access Token mới) rồi thử lại. |
+|                      |  • Nếu thất bại: Xóa Session/Cookie và Redirect người dùng về trang [Đăng nhập].        |
++----------------------+-----------------------------------------------------------------------------------------+
+| 403 Forbidden        |  • NGHIÊM CẤM RETRY.                                                                    |
+|                      |  • Khóa tính năng hoặc hiển thị màn hình thông báo: "Bạn không có quyền truy cập".      |
++----------------------+-----------------------------------------------------------------------------------------+
+| 404 Not Found        |  • NGHIÊM CẤM RETRY.                                                                    |
+|                      |  • Hiển thị giao diện trống (Empty State) hoặc trang báo: "Đường dẫn không tồn tại".    |
++----------------------+-----------------------------------------------------------------------------------------+
+| 429 Too Many Requests|  • Tạm dừng gửi request.                                                                |
+|                      |  • Đọc chỉ số từ Header `Retry-After` do Server trả về để thiết lập thời gian hoãn đếm  |
+|                        ngược (Delay), sau đó mới tiến hành Retry lại request.                                  |
++----------------------+-----------------------------------------------------------------------------------------+
+| 5xx Server Error     |  • Lỗi hệ thống từ máy chủ phía Backend.                                                |
+|                      |  • Triển khai cơ chế tự động thử lại tối đa 3 lần dựa trên thuật toán                   |
+|                        Exponential Backoff (Thời gian chờ tăng dần theo cấp số nhân, ví dụ: 1s -> 2s -> 4s).   |
++----------------------+-----------------------------------------------------------------------------------------+
+| Timeout              |  • Hủy Request (Abort) và hiển thị thông báo: "Hệ thống phản hồi quá chậm".             |
+|                      |  • Cho phép người dùng bấm nút kích hoạt gửi lại lệnh thủ công.                         |
++----------------------+-----------------------------------------------------------------------------------------+
+
+
